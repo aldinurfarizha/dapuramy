@@ -32,6 +32,7 @@ public class home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        User user = SharedPrefManager.getInstance(this).getUser();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

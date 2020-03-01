@@ -31,7 +31,7 @@
         android:layout_weight="6.5"
         >
         <EditText
-            android:text="Name"
+            android:hint="Name"
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_marginBottom="20dp"
@@ -41,27 +41,27 @@
 
         </EditText>
         <EditText
-            android:text="Phone Number"
+            android:hint="Phone Number"
             android:layout_width="match_parent"
             android:inputType="number"
             android:id="@+id/input_phone_number"
-            android:layout_above="@+id/input_phone_password"
+            android:layout_above="@+id/input_password"
             android:layout_height="wrap_content">
 
         </EditText>
         <EditText
-            android:text="Password"
+            android:hint="Password"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_centerInParent="true"
-            android:id="@+id/input_phone_password"
+            android:id="@+id/input_password"
             android:layout_height="wrap_content">
 
         </EditText>
         <TextView
             android:text="Pramuka Stree no.30"
-            android:layout_below="@id/input_phone_password"
+            android:layout_below="@id/input_password"
             android:layout_marginTop="20dp"
             android:textColor="#000"
             android:layout_width="match_parent"
@@ -86,10 +86,19 @@
         android:layout_height="0dp"
         android:padding="25dp"
         android:layout_weight="1.5">
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create Account"
+            android:id="@+id/btn_create_account"
             android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true">
 
