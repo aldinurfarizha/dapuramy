@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#EEECEC"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
@@ -38,21 +39,30 @@
 </TextView>
        </RelativeLayout>
 
-       <ScrollView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Available Food"
+            android:textColor="#000"
+            android:textAlignment="center">
+
+        </TextView>
+    </RelativeLayout>
+
+       <ListView
            android:layout_width="match_parent"
            android:layout_height="0dp"
-           android:weightSum="10"
-           android:orientation="vertical"
-           android:layout_weight="6">
+           android:id="@+id/list_view_ready_food"
+           android:layout_weight="5.5">
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:text="Menu Item"
-               android:textAlignment="center">
+       </ListView>
 
-           </TextView>
 
-       </ScrollView>
+
+
    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

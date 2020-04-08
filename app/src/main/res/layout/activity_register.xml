@@ -8,34 +8,53 @@
     android:orientation="vertical"
     tools:context=".register">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:orientation="vertical"
+        android:layout_weight="2.5">
 
         <TextView
-            android:layout_centerInParent="true"
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000"
             android:text="Create New Account"
             android:textSize="30dp"
-            android:textAlignment="center">
+            >
         </TextView>
 
-    </RelativeLayout>
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register">
+
+        </ImageView>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="45dp"
-        android:layout_weight="6.5"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_weight="6"
         >
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="#8B8989"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*You Must Register before Use our Service"
+            ></TextView>
         <EditText
             android:hint="Name"
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_marginBottom="20dp"
             android:id="@+id/input_name"
+            android:drawableLeft="@drawable/akunbiru"
             android:layout_above="@+id/input_phone_number"
             android:layout_height="wrap_content">
 
@@ -44,6 +63,7 @@
             android:hint="Phone Number"
             android:layout_width="match_parent"
             android:inputType="number"
+            android:drawableLeft="@drawable/phone"
             android:id="@+id/input_phone_number"
             android:layout_above="@+id/input_password"
             android:layout_height="wrap_content">
@@ -55,28 +75,35 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/password"
             android:id="@+id/input_password"
             android:layout_height="wrap_content">
 
         </EditText>
-        <TextView
-            android:text="Pramuka Stree no.30"
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address "
+            android:textColor="#4D4D4D"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/address"
             android:layout_below="@id/input_password"
             android:layout_marginTop="20dp"
-            android:textColor="#000"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:id="@+id/genrate_address"
-            android:layout_height="wrap_content">
+            android:id="@+id/address"
 
-        </TextView>
+            >
+
+        </EditText>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="KTP"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/genrate_address">
+            android:background="@drawable/roundedbutton2"
+            android:textColor="#fff"
+            android:layout_below="@id/address">
 
         </Button>
 
@@ -97,7 +124,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:text="Create Account"
+            android:background="@drawable/roundedbutton"
             android:id="@+id/btn_create_account"
             android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true">

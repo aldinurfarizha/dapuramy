@@ -19,7 +19,7 @@
             android:layout_centerInParent="true"
             android:textColor="#000"
             android:layout_height="wrap_content"
-            android:text="Order Proses Steps ( Transfer Payment Method )">
+            android:text="Order Proses Steps  ( Transfer Payment Method )">
 
         </TextView>
     </RelativeLayout>

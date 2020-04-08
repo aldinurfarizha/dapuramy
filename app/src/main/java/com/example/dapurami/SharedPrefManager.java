@@ -13,6 +13,7 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "Aldinurfarizha";
     private static final String KEY_NAME = "keyname";
     private static final String KEY_PHONE_NUMBER = "keyphonenumber";
+    private static final String KEY_ADDRESS = "keyaddress";
     private static final String KEY_ID = "keyid";
 
     private static SharedPrefManager mInstance;
@@ -37,6 +38,8 @@ public class SharedPrefManager {
         editor.putInt(KEY_ID, user.getId());
         editor.putString(KEY_NAME, user.getName());
         editor.putString(KEY_PHONE_NUMBER, user.getPhone_number());
+        editor.putString(KEY_ADDRESS, user.getAddress());
+
         editor.apply();
     }
 
@@ -52,7 +55,9 @@ public class SharedPrefManager {
         return new User(
                 sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getString(KEY_NAME, null),
-                sharedPreferences.getString(KEY_PHONE_NUMBER, null)
+                sharedPreferences.getString(KEY_PHONE_NUMBER, null),
+                sharedPreferences.getString(KEY_ADDRESS, null)
+
         );
     }
 

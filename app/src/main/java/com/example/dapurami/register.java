@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class register extends AppCompatActivity {
-EditText edtname, edtphone_number, edtpassword;
+EditText edtname, edtphone_number, edtpassword, edtaddress;
 Button btncreate_account;
 ProgressBar progressBar;
 
@@ -37,6 +38,7 @@ ProgressBar progressBar;
         edtpassword=(EditText)findViewById(R.id.input_password);
         btncreate_account=(Button)findViewById(R.id.btn_create_account);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
+        edtaddress=(EditText)findViewById(R.id.address);
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(register.this, login.class));
@@ -57,6 +59,7 @@ ProgressBar progressBar;
         final String name = edtname.getText().toString().trim();
         final String phone_number = edtphone_number.getText().toString().trim();
         final String password = edtpassword.getText().toString().trim();
+        final String address = edtaddress.getText().toString().trim();
 
 
         //first we will do the validations
@@ -76,6 +79,11 @@ ProgressBar progressBar;
         if (TextUtils.isEmpty(password)) {
             edtpassword.setError("Enter a password");
             edtpassword.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            edtaddress.setError("Enter a Address");
+            edtaddress.requestFocus();
             return;
         }
 
@@ -98,9 +106,10 @@ ProgressBar progressBar;
 
                                 //creating a new user object
                                 User user = new User(
-                                        userJson.getInt("id"),
+                                        userJson.getInt("id_customer"),
                                         userJson.getString("name"),
-                                        userJson.getString("phone_number")
+                                        userJson.getString("phone_number"),
+                                        userJson.getString("address")
                                 );
 
                                 //storing the user in shared preferences
@@ -131,6 +140,7 @@ ProgressBar progressBar;
                 params.put("name", name);
                 params.put("phone_number", phone_number);
                 params.put("password", password);
+                params.put("address", address);
                 return params;
             }
         };

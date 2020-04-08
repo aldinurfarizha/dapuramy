@@ -31,16 +31,15 @@
         android:layout_weight="3.5"
         >
         <EditText
-            android:text="Phone Number"
+            android:hint="Phone Number"
             android:layout_width="match_parent"
             android:inputType="number"
             android:id="@+id/input_phone_number"
-            android:layout_above="@+id/input_phone_password"
             android:layout_height="wrap_content">
 
         </EditText>
         <EditText
-            android:text="Password"
+            android:hint="Password"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -60,6 +59,17 @@
             android:layout_below="@id/input_phone_password">
 
         </Button>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:id="@+id/progressbar"
+            android:layout_below="@id/input_phone_password">
+
+        </ProgressBar>
 
     </RelativeLayout>
     <RelativeLayout
