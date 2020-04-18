@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:weightSum="10"
+    android:padding="5dp"
+    android:background="@drawable/roundedbackground"
+    android:orientation="horizontal">
+<RelativeLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="4">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/food"></ImageView>
+
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Title"
+        android:id="@+id/food_title"
+        android:textColor="#000"
+        android:textSize="24sp">
+
+    </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Description"
+            android:id="@+id/food_description"
+            android:layout_below="@+id/food_title"
+            android:textColor="#837F7F"
+            android:textSize="14sp">
+
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Detail"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/roundedbutton3">
+
+        </Button>
+    </RelativeLayout>
+
+
+</LinearLayout>

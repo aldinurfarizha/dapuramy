@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    android:padding="2dp">
+    <RelativeLayout
+        android:layout_width="200dp"
+
+
+        android:padding="5dp"
+
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:elevation="4dp"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cilok Stun"
+        android:textSize="15sp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/judul_makanan"
+        android:textColor="#000"
+        android:layout_below="@+id/image_view">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="10sp"
+        android:id="@+id/deskripsi_makanan"
+        android:text="Cilok Stoone Is and organic Food Who Created By Traditional Souce"
+        android:textColor="#5A5757"
+        android:layout_below="@+id/judul_makanan">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rp. 5.000"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/harga_makanan"
+        android:textColor="#000"
+        android:layout_below="@+id/deskripsi_makanan">
+    </TextView>
+</LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
