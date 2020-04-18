@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.dapurami.ui.home.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,14 +29,12 @@ public class login extends AppCompatActivity {
 Button login;
 EditText phonenumber, password;
 ProgressBar progressBar;
-TextView coba;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         User user = SharedPrefManager.getInstance(this).getUser();
-        coba=(TextView)findViewById(R.id.cobanama);
-        coba.setText(user.getName());
+
         login=(Button) findViewById(R.id.btn_login);
         phonenumber=(EditText)findViewById(R.id.input_phone_number);
         password=(EditText)findViewById(R.id.input_phone_password);
@@ -94,7 +93,7 @@ TextView coba;
 
                                 //creating a new user object
                                 User user = new User(
-                                        userJson.getInt("id"),
+                                        userJson.getInt("id_customer"),
                                         userJson.getString("name"),
                                         userJson.getString("phone_number"),
                                         userJson.getString("address")

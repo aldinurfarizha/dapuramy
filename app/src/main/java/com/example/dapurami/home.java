@@ -2,6 +2,14 @@ package com.example.dapurami;
 
 import android.os.Bundle;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.dapurami.ui.ViewPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -9,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,15 +30,38 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class home extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private static final String HI ="https://uniqueandrocode.000webhostapp.com/hiren/androidweb.php" ;
+    private ArrayList<List_data> list_data;
+    private GridView gridView;
+    MyAdapter adapter;
+    ViewPager viewPager;
+    LinearLayout sliderDotspanel;
+    private int dotscount;
+    private ImageView[] dots;
+    String request_url = "http://192.168.100.22/dapuramy/api.php?apicall=get_banner";
+    RequestQueue rq;
+    List<SliderUtils> sliderImg;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +70,48 @@ public class home extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        gridView=(GridView)findViewById(R.id.gridView);
+        list_data=new ArrayList<>();
+
+        // adapter=new MyAdapter(getApplicationContext(),list_data);
+        getData();
+
+        rq = CustomVolleyRequest.getInstance(this).getRequestQueue();
+
+        sliderImg = new ArrayList<>();
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
+
+        sendRequest();
+
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                for(int i = 0; i< dotscount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
+                }
+
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
         User user = SharedPrefManager.getInstance(this).getUser();
-
-
-
-
-
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +145,10 @@ public class home extends AppCompatActivity {
                     finish();
                     SharedPrefManager.getInstance(getApplicationContext()).logout();
                 }
+                if(id==R.id.nav_gallery){
+                    NavigationView navigationView= findViewById(R.id.nav_gallery);
+                    navigationView.setNavigationItemSelectedListener(this);
+                }
                 //This is for maintaining the behavior of the Navigation view
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
                 //This is for closing the drawer after acting on it
@@ -101,6 +171,89 @@ public class home extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+    private void getData() {
+        StringRequest stringRequest =new StringRequest(Request.Method.GET, HI, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    JSONArray array=jsonObject.getJSONArray("data");
+                    for (int i=0; i<array.length(); i++){
+                        JSONObject ob=array.getJSONObject(i);
+                        List_data listData=new List_data(ob.getString("name"),ob.getString("imageurl"));
+                        list_data.add(listData);
+                    }
+                    adapter=new MyAdapter(getApplicationContext(),R.layout.grid_list,list_data);
+                    gridView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+    public void sendRequest(){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_url, (String) null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                for(int i = 0; i < response.length(); i++){
+
+                    SliderUtils sliderUtils = new SliderUtils();
+
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        sliderUtils.setSliderImageUrl(jsonObject.getString("image_url"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    sliderImg.add(sliderUtils);
+
+                }
+
+                viewPagerAdapter = new ViewPagerAdapter(sliderImg, home.this);
+
+                viewPager.setAdapter(viewPagerAdapter);
+
+                dotscount = viewPagerAdapter.getCount();
+                dots = new ImageView[dotscount];
+
+                for(int i = 0; i < dotscount; i++){
+
+                    dots[i] = new ImageView(home.this);
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.non_active_dot));
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    params.setMargins(8, 0, 8, 0);
+
+                    sliderDotspanel.addView(dots[i], params);
+
+                }
+
+                dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        CustomVolleyRequest.getInstance(this).addToRequestQueue(jsonArrayRequest);
+
+    }
 
 }
