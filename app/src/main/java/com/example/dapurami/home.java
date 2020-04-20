@@ -1,5 +1,6 @@
 package com.example.dapurami;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -30,12 +31,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,15 +54,16 @@ import java.util.List;
 public class home extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private static final String HI ="https://uniqueandrocode.000webhostapp.com/hiren/androidweb.php" ;
+
     private ArrayList<List_data> list_data;
-    private GridView gridView;
+    private ArrayList<List_data2> list_data2;
+    private RecyclerView gridView, gridView2;
     MyAdapter adapter;
+    drink_adapter adapter2;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
-    String request_url = "http://192.168.100.22/dapuramy/api.php?apicall=get_banner";
     RequestQueue rq;
     List<SliderUtils> sliderImg;
     ViewPagerAdapter viewPagerAdapter;
@@ -69,11 +74,15 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        gridView=(GridView)findViewById(R.id.gridView);
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.cart);
+        toolbar.setOverflowIcon(drawable);
+        gridView=(RecyclerView) findViewById(R.id.gridView);
+        gridView2=(RecyclerView) findViewById(R.id.gridView2);
         list_data=new ArrayList<>();
-
+        list_data2=new ArrayList<>();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
+
+        getData2();
         getData();
 
         rq = CustomVolleyRequest.getInstance(this).getRequestQueue();
@@ -112,13 +121,7 @@ public class home extends AppCompatActivity {
 
 
         User user = SharedPrefManager.getInstance(this).getUser();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -172,7 +175,7 @@ public class home extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
     private void getData() {
-        StringRequest stringRequest =new StringRequest(Request.Method.GET, HI, new Response.Listener<String>() {
+        StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_PRODUCT, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
@@ -181,10 +184,14 @@ public class home extends AppCompatActivity {
                     JSONArray array=jsonObject.getJSONArray("data");
                     for (int i=0; i<array.length(); i++){
                         JSONObject ob=array.getJSONObject(i);
-                        List_data listData=new List_data(ob.getString("name"),ob.getString("imageurl"));
+                        List_data listData=new List_data(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
                         list_data.add(listData);
                     }
-                    adapter=new MyAdapter(getApplicationContext(),R.layout.grid_list,list_data);
+                    adapter=new MyAdapter(list_data);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(home.this, LinearLayoutManager.HORIZONTAL,false);
+
+                    gridView.setLayoutManager(layoutManager);
+
                     gridView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -198,10 +205,43 @@ public class home extends AppCompatActivity {
         });
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
+    } //ambil list maknan
+
+    private void getData2() {
+        StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_DRINK, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    JSONArray array=jsonObject.getJSONArray("data");
+                    for (int i=0; i<array.length(); i++){
+                        JSONObject ob=array.getJSONObject(i);
+                        List_data2 listData2=new List_data2(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
+                        list_data2.add(listData2);
+                    }
+                    adapter2=new drink_adapter(list_data2);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(home.this, LinearLayoutManager.HORIZONTAL,false);
+
+                    gridView2.setLayoutManager(layoutManager);
+
+                    gridView2.setAdapter(adapter2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    } //ambil list minuman
     public void sendRequest(){
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_url, (String) null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URLs.URL_BANNER, (String) null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
@@ -254,6 +294,6 @@ public class home extends AppCompatActivity {
 
         CustomVolleyRequest.getInstance(this).addToRequestQueue(jsonArrayRequest);
 
-    }
+    } //ambil slider
 
 }

@@ -1,7 +1,7 @@
 package com.example.dapurami;
 
 
-class List_data {
+class List_data2 {
     private String id_product;
     private String product_name;
     private String description;
@@ -9,7 +9,7 @@ class List_data {
     private String price;
     private String picture;
 
-    public List_data(String id_product, String product_name, String description, String stock, String price, String picture) {
+    public List_data2(String id_product, String product_name, String description, String stock, String price, String picture) {
         this.id_product = id_product;
         this.product_name = product_name;
         this.description = description;

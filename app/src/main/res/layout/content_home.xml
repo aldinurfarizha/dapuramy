@@ -19,60 +19,231 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popUpToInclusive="true"
         app:navGraph="@navigation/mobile_navigation" />
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:weightSum="10"
-       android:orientation="vertical">
-
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="4">
-           <androidx.viewpager.widget.ViewPager
-               android:id="@+id/viewPager"
-               android:layout_width="match_parent"
-               android:layout_height="190dp"
-               android:layout_marginBottom="8dp"/>
-
-           <LinearLayout
-               android:id="@+id/SliderDots"
-               android:layout_below="@+id/viewPager"
-               android:orientation="horizontal"
-               android:gravity="center_vertical|center_horizontal"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"/>
-    
-
-
-       </RelativeLayout>
-
-    <RelativeLayout
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Available Food"
-            android:textColor="#000"
-            android:textAlignment="center">
+            android:layout_height="wrap_content"
+            >
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginBottom="8dp"/>
 
-        </TextView>
-    </RelativeLayout>
-
-       <GridView
-           android:id="@+id/gridView"
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:numColumns="2"
-           android:layout_weight="5.5">
-
-       </GridView>
-
+            <LinearLayout
+                android:id="@+id/SliderDots"
+                android:layout_below="@+id/viewPager"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
 
-   </LinearLayout>
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            app:cardElevation="6dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="2.5"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:layout_width="70dp"
+                    android:background="@drawable/datalist"
+                    android:id="@+id/data_list"
+                    android:layout_height="55dp">
+                </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/data_list"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:textSize="11sp"
+                    android:layout_centerHorizontal="true"
+                    android:text="List Menu">
+
+                </TextView>
+            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="2.5"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:layout_width="65dp"
+                        android:background="@drawable/voting"
+                        android:id="@+id/voting"
+                        android:layout_height="55dp">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/voting"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:textSize="11sp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Voting">
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="2.5"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:layout_width="65dp"
+                        android:background="@drawable/profile"
+                        android:id="@+id/profile"
+                        android:layout_height="55dp">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/profile"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:textSize="11sp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Profile">
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="2.5"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:layout_width="65dp"
+                        android:background="@drawable/notification"
+                        android:id="@+id/notif"
+                        android:layout_height="55dp">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notif"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:textSize="11sp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Notification">
+
+                    </TextView>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Food"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="#5E5C5C"
+                >
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textSize="13sp"
+                android:elevation="5dp"
+                android:layout_alignParentRight="true"
+                android:fontFamily="sans-serif"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                android:textColor="#03A9F4"
+                >
+
+            </TextView>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Drink"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="#5E5C5C"
+                >
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textSize="13sp"
+                android:elevation="5dp"
+                android:layout_alignParentRight="true"
+                android:fontFamily="sans-serif"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                android:textColor="#03A9F4"
+                >
+
+            </TextView>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gridView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
+</ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

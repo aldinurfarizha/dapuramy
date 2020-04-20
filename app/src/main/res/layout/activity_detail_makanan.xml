@@ -7,58 +7,111 @@
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".detail_makanan">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Nama Makanan">
 
-    </TextView>
-</RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="3.9">
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="8dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/food"
+    android:id="@+id/gambar_makanan">
 
+</ImageView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_weight="1">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Nama Makanan">
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:id="@+id/harga_makanan_detail"
+            android:layout_marginRight="20dp"
+            android:gravity="end"
+            android:text="Rp.50.000">
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="#4CAF50"
+            android:id="@+id/stock_detail"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/harga_makanan_detail"
+            android:gravity="end"
+            android:text="(Stock : 80)">
 
         </TextView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:text="Deskripisi">
+        android:layout_weight="4.3">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:id="@+id/nama_makanan_detail"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="Jagung Bakar Rasa Kentang">
 
-    </TextView>
-</ScrollView>
+        </TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/nama_makanan_detail"
+            android:padding="8dp"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="8dp"
+                android:elevation="8dp"
+                android:layout_height="match_parent">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:fontFamily="serif"
+                        android:id="@+id/deskripsi_makanan_detail"
+                        android:padding="15dp"
+                        android:textColor="#505050"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum">
+
+                    </TextView>
+                </ScrollView>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
     </RelativeLayout>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1">
+
+    android:layout_weight="0.8">
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Order">
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/btn_addtocart"
+        android:background="@drawable/roundedbutton"
+        android:text="Add To Cart">
 
     </Button>
 </RelativeLayout>
