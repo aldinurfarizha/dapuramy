@@ -10,38 +10,85 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Your Cart">
-
-    </TextView>
+    android:layout_weight="0.5">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:weightSum="10"
+       android:background="@color/colorAccent"
+       android:orientation="horizontal">
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="2">
+       </TextView>
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="Product Name"
+           android:textColor="#000"
+           android:layout_marginLeft="2dp"
+           android:layout_gravity="center"
+           android:layout_weight="3.5">
+       </TextView>
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="Qty"
+           android:textColor="#000"
+           android:textAlignment="center"
+           android:layout_gravity="center"
+           android:layout_weight="1.5">
+       </TextView>
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="Price"
+           android:textColor="#000"
+           android:textAlignment="center"
+           android:layout_gravity="center"
+           android:layout_weight="3">
+       </TextView>
+   </LinearLayout>
 
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
+            <ListView
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:text="chart Descriptiion"
                 android:layout_height="match_parent">
+            </ListView>
 
-            </TextView>
-        </ScrollView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
             android:text="Sub Total :">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="Rp.176.000">
 
         </TextView>
     </RelativeLayout>
@@ -49,29 +96,19 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
+        android:padding="10dp"
         android:layout_height="0dp">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Home">
 
-            </Button>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:background="@drawable/roundedbutton3"
                 android:text="Checkout">
 
             </Button>
-        </RelativeLayout>
+
     </LinearLayout>
 </LinearLayout>

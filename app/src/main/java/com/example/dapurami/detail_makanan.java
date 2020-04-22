@@ -1,12 +1,17 @@
 package com.example.dapurami;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +21,10 @@ import com.squareup.picasso.Picasso;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import static com.example.dapurami.splash_screen.mSQLiteHelper;
+
 public class detail_makanan extends AppCompatActivity {
-String food_title, image_url, descriptiion, price, stock;
+String food_title, image_url, descriptiion, price, stock, id_product;
 TextView tv_food_title, tv_description, tv_price, tv_stock;
 ImageView gambar_makanan;
 Button add_to_cart;
@@ -34,6 +41,7 @@ Button add_to_cart;
         descriptiion = intent.getExtras().getString("deskripsi");
         price = intent.getExtras().getString("harga");
         stock = intent.getExtras().getString("stock");
+        id_product = intent.getExtras().getString("id_product");
          tv_food_title=(TextView)findViewById(R.id.nama_makanan_detail);
         tv_description=(TextView)findViewById(R.id.deskripsi_makanan_detail);
         tv_price=(TextView)findViewById(R.id.harga_makanan_detail);
@@ -44,7 +52,39 @@ Button add_to_cart;
          add_to_cart.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 Toast.makeText(getApplicationContext(), image_url, Toast.LENGTH_SHORT).show();
+                 LayoutInflater inflater = (LayoutInflater) detail_makanan.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                 final View formsView = inflater.inflate(R.layout.qty, null, false);
+                 final EditText qtyev = (EditText) formsView.findViewById(R.id.qty);
+                 new AlertDialog.Builder(detail_makanan.this)
+                         .setView(formsView)
+                         .setTitle("ISI NAMA LENGKAP ANDA")
+                         .setPositiveButton("OK",
+                                 new DialogInterface.OnClickListener() {
+                                     @TargetApi(11)
+                                     public void onClick(
+                                             DialogInterface dialog, int id) {
+                                         String qty = qtyev.getText().toString();
+                                         try {
+                                             mSQLiteHelper.insertData(
+                                                     id_product,
+                                                     id_product.trim(),
+                                                     food_title.trim(),
+                                                     qty.trim(),
+                                                     image_url.trim()
+                                             );
+                                             Toast.makeText(detail_makanan.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                                             //reset views
+
+                                         }
+                                         catch (Exception e){
+                                             e.printStackTrace();
+                                         }
+
+                                         dialog.cancel();
+                                     }
+                                 }).show();
+
+
              }
          });
     }

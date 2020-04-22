@@ -77,12 +77,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MahasiswaViewHolde
                 final String deskripsi = dataList.get(position).getDescription();
                 final String harga = dataList.get(position).getPrice();
                 final String stock= dataList.get(position).getStock();
+                final String id_product= dataList.get(position).getId_product();
 
                 intent.putExtra("food_title", food_title);
                 intent.putExtra("image_url", image_url);
                 intent.putExtra("deskripsi", deskripsi);
                 intent.putExtra("harga",harga);
                 intent.putExtra("stock",stock);
+                intent.putExtra("id_product",id_product);
 
                 context.startActivity(intent);
             }

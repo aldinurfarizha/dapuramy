@@ -69,12 +69,14 @@ public class drink_adapter extends RecyclerView.Adapter<drink_adapter.MahasiswaV
                 final String deskripsi = dataList2.get(position).getDescription();
                 final String harga = dataList2.get(position).getPrice();
                 final String stock= dataList2.get(position).getStock();
+                final String id_product= dataList2.get(position).getId_product();
 
                 intent.putExtra("food_title", food_title);
                 intent.putExtra("image_url", image_url);
                 intent.putExtra("deskripsi", deskripsi);
                 intent.putExtra("harga",harga);
                 intent.putExtra("stock",stock);
+                intent.putExtra("id_product",id_product);
 
                 context.startActivity(intent);
             }

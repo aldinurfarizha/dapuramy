@@ -1,5 +1,6 @@
 package com.example.dapurami;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -40,6 +41,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,7 @@ public class home extends AppCompatActivity {
     drink_adapter adapter2;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
+    RelativeLayout btn_notification;
     private int dotscount;
     private ImageView[] dots;
     RequestQueue rq;
@@ -78,10 +81,17 @@ public class home extends AppCompatActivity {
         toolbar.setOverflowIcon(drawable);
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView2=(RecyclerView) findViewById(R.id.gridView2);
+        btn_notification=(RelativeLayout)findViewById(R.id.notification_btn);
         list_data=new ArrayList<>();
         list_data2=new ArrayList<>();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
-
+        btn_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, cart.class);
+                startActivity(intent);
+            }
+        });
         getData2();
         getData();
 
@@ -178,7 +188,6 @@ public class home extends AppCompatActivity {
         StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_PRODUCT, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");
@@ -211,7 +220,6 @@ public class home extends AppCompatActivity {
         StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_DRINK, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");

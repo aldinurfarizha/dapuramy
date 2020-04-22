@@ -136,6 +136,7 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:orientation="vertical"
+                    android:id="@+id/notification_btn"
                     android:layout_weight="2.5"
                     android:layout_height="wrap_content">
                     <ImageView
