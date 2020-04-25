@@ -55,22 +55,27 @@ Button add_to_cart;
                  LayoutInflater inflater = (LayoutInflater) detail_makanan.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                  final View formsView = inflater.inflate(R.layout.qty, null, false);
                  final EditText qtyev = (EditText) formsView.findViewById(R.id.qty);
+
                  new AlertDialog.Builder(detail_makanan.this)
                          .setView(formsView)
-                         .setTitle("ISI NAMA LENGKAP ANDA")
+                         .setTitle("Masukan Jumlah Pemesanan")
                          .setPositiveButton("OK",
                                  new DialogInterface.OnClickListener() {
                                      @TargetApi(11)
                                      public void onClick(
                                              DialogInterface dialog, int id) {
                                          String qty = qtyev.getText().toString();
+                                         Integer qtya=Integer.valueOf(qtyev.getText().toString());
+                                         Integer pricea=Integer.valueOf(price);
+                                         final Integer price_final=pricea*qtya;
                                          try {
                                              mSQLiteHelper.insertData(
                                                      id_product,
                                                      id_product.trim(),
                                                      food_title.trim(),
                                                      qty.trim(),
-                                                     image_url.trim()
+                                                     image_url.trim(),
+                                                     price_final.toString().trim()
                                              );
                                              Toast.makeText(detail_makanan.this, "Added successfully", Toast.LENGTH_SHORT).show();
                                              //reset views

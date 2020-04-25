@@ -22,20 +22,12 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     }
 
     //insertData
-    public void insertData(String id_order, String id_product, String product_name, String qty,String img){
+    public void insertData(String id_order, String id_product, String product_name, String qty,String img, String price){
         SQLiteDatabase database = getWritableDatabase();
         //query to insert record in database table
-        String sql = "INSERT INTO cart VALUES(?, ?, ?, ?, ?)"; //where "RECORD" is table name in database we will create in mainActivity
+        String sql = "INSERT INTO cart(id_order, id_product, product_name, qty, img, price) VALUES('"+id_order+"', '"+id_product+"', '"+product_name+"', "+qty+", '"+img+"', "+price+")"; //where "RECORD" is table name in database we will create in mainActivity
 
         SQLiteStatement statement = database.compileStatement(sql);
-        statement.clearBindings();
-
-        statement.bindString(1, id_order);
-        statement.bindString(2, id_product);
-        statement.bindString(3, product_name);
-        statement.bindString(4, qty);
-        statement.bindString(5, img);
-
         statement.executeInsert();
     }
 
@@ -58,15 +50,11 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     }
 
     //deleteData
-    public void deleteData(int id){
+    public void deleteData(int id_product){
         SQLiteDatabase database = getWritableDatabase();
         //query to delete record using id
-        String sql = "DELETE FROM RECORD WHERE id=?";
-
+        String sql = "DELETE FROM cart WHERE id_product="+id_product+"";
         SQLiteStatement statement = database.compileStatement(sql);
-        statement.clearBindings();
-        statement.bindDouble(1, (double)id);
-
         statement.execute();
         database.close();
     }

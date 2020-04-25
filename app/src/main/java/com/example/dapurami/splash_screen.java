@@ -19,7 +19,7 @@ Button getstarted;
         mSQLiteHelper = new SQLiteHelper(this, "cart.sqlite", null, 1);
 
         //creating table in database
-        mSQLiteHelper.queryData("CREATE TABLE IF NOT EXISTS cart(id_order INTEGER , id_product VARCHAR, product_name VARCHAR, qty VARCHAR, img VARCHAR)");
+        mSQLiteHelper.queryData("CREATE TABLE IF NOT EXISTS cart(id_order INTEGER , id_product VARCHAR PRIMARY KEY, product_name VARCHAR, qty INTEGER, img VARCHAR, price INTEGER)");
         getstarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
