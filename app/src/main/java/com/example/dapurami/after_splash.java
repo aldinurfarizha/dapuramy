@@ -15,7 +15,10 @@ Button signin,signup;
         setContentView(R.layout.activity_after_splash);
         signin=(Button)(findViewById(R.id.btn_signin));
         signup=(Button)(findViewById(R.id.btn_signup));
-
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, home.class));
+        }
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

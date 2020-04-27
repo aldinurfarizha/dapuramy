@@ -1,6 +1,8 @@
 package com.example.dapurami;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -18,8 +20,11 @@ import com.google.android.material.snackbar.Snackbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.DrawableUtils;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -79,6 +84,7 @@ public class home extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.cart);
         toolbar.setOverflowIcon(drawable);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView2=(RecyclerView) findViewById(R.id.gridView2);
         btn_notification=(RelativeLayout)findViewById(R.id.notification_btn);
@@ -88,8 +94,6 @@ public class home extends AppCompatActivity {
         btn_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(home.this, cart.class);
-                startActivity(intent);
             }
         });
         getData2();
@@ -175,7 +179,19 @@ public class home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        Drawable send = (Drawable) menu.findItem(R.drawable.cart);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Intent intent = new Intent(home.this, cart.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

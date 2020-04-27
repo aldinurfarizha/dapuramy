@@ -19,7 +19,7 @@
         <activity android:name=".detail_order" />
         <activity android:name=".order_sukses" />
         <activity android:name=".check_out" />
-        <activity android:name=".cart" />
+        <activity android:name=".cart" android:noHistory="true" />
         <activity android:name=".detail_makanan" />
         <activity
             android:name=".home"

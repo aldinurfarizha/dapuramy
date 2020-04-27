@@ -2,6 +2,7 @@ package com.example.dapurami;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ColorSpace;
@@ -22,10 +23,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.example.dapurami.splash_screen.cart1;
 import static com.example.dapurami.splash_screen.mSQLiteHelper;
-
 public class cart_adapter extends BaseAdapter {
-    public static cart cart;
+
     private Context context;
     private int layout;
     private ArrayList<cart_model> recordList;
@@ -55,6 +56,18 @@ public class cart_adapter extends BaseAdapter {
         TextView txtproduct, txtqty, txtprice;
         ImageView gbr_cart, delete_product;
         Context context;
+    }
+    public void reload_data(){
+        cart1.update_product();
+    }
+    public void delete_data(int id){
+        try {
+            mSQLiteHelper.deleteData(id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -95,29 +108,27 @@ public class cart_adapter extends BaseAdapter {
                 final int id=Integer.valueOf(id_product);
                 new AlertDialog.Builder(context)
                         .setTitle("Delete entry")
-                        .setMessage("Are you sure you want to delete this entry?")
+                        .setMessage("Are you sure you want to delete this product ?")
 
                         // Specifying a listener allows you to take an action before dismissing the dialog.
                         // The dialog is automatically dismissed when a dialog button is clicked.
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    mSQLiteHelper.deleteData(id);
-                                    Toast tea = Toast.makeText(context.getApplicationContext(), "Succsess Deleted ", Toast.LENGTH_LONG);
-                                    tea.show();
-                                    cart.mList.remove(recordList.get(i));
-                                    cart.mAdapter.notifyDataSetChanged();
-                                }
+                                recordList.remove(i);
+                                notifyDataSetChanged();
+                                delete_data(id);
+                                Toast tea = Toast.makeText(context.getApplicationContext(), "Succsess Deleted ", Toast.LENGTH_LONG);
+                                tea.show();
+                                Intent intent = new Intent(context.getApplicationContext(), cart.class);
+                                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
 
-                                catch (Exception e){
-                                    e.printStackTrace();
-                                }
                             }
                         })
 
                         // A null listener allows the button to dismiss the dialog and take no further action.
                         .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(android.R.drawable.ic_delete)
                         .show();
 
             }

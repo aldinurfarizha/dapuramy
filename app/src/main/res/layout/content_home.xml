@@ -243,8 +243,62 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            app:cardElevation="12dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-thin"
+                    android:textStyle="bold"
+                    android:text="Offline Store">
+                </TextView>
+                <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="200dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/dapuramy"
+                    android:layout_height="150dp">
+                </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@drawable/address"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:text="Jalan bunut no 58 perum alam asri kasturi kuningan">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@drawable/phone_white"
+                    android:layout_height="wrap_content"
+                    android:text="082235468564">
+                </TextView>
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+
 </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
