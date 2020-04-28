@@ -6,6 +6,8 @@ public class URLs {
     public static final String GET_IMAGE ="http://192.168.176.252/dapuramyweb/assets/images/product/";
 
     public static final String URL_REGISTER = ROOT_URL + "signup";
+    public static final String URL_PLACE_ORDER = ROOT_URL + "place_order";
+    public static final String URL_PLACE_TRANSACTION = ROOT_URL + "place_transaction";
     public static final String URL_LOGIN= ROOT_URL + "login";
     public static final String URL_BANNER= ROOT_URL + "get_banner";
     public static final String URL_GET_READY_PRODUCT= ROOT_URL + "get_ready_product";

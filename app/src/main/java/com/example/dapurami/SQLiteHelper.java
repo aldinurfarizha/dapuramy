@@ -6,6 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class SQLiteHelper extends SQLiteOpenHelper{
 
     //constructor
@@ -59,6 +64,15 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         database.close();
     }
 
+    public void deleteallData(){
+        SQLiteDatabase database = getWritableDatabase();
+        //query to delete record using id
+        String sql = "DELETE FROM cart";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.execute();
+        database.close();
+    }
+
     public Cursor getData(String sql){
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);
@@ -73,4 +87,5 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
 }

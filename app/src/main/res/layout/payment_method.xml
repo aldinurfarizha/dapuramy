@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+   <RadioGroup
+       android:layout_marginTop="20dp"
+       android:layout_width="match_parent"
+       android:id="@+id/rg"
+       android:layout_centerHorizontal="true"
+       android:layout_height="wrap_content">
+       <RadioButton
+           android:drawableLeft="@drawable/money"
+           android:layout_width="match_parent"
+           android:id="@+id/cash"
+           android:layout_height="wrap_content"
+           android:text="CASH">
+       </RadioButton>
+       <RadioButton
+           android:layout_width="match_parent"
+           android:id="@+id/cod"
+           android:layout_marginTop="10dp"
+           android:drawableLeft="@drawable/cod"
+           android:layout_height="wrap_content"
+           android:text="COD">
+       </RadioButton>
+       <RadioButton
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:id="@+id/transfer"
+           android:drawableLeft="@drawable/transfer"
+           android:text="TRANSFER">
+       </RadioButton>
+   </RadioGroup>
+
+</RelativeLayout>

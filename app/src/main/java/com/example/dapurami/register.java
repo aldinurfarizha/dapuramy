@@ -109,7 +109,8 @@ ProgressBar progressBar;
                                         userJson.getInt("id_customer"),
                                         userJson.getString("name"),
                                         userJson.getString("phone_number"),
-                                        userJson.getString("address")
+                                        userJson.getString("address"),
+                                        userJson.getString("status")
                                 );
 
                                 //storing the user in shared preferences

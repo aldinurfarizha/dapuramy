@@ -17,6 +17,7 @@ import com.example.dapurami.ui.ViewPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -46,6 +47,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +77,7 @@ public class home extends AppCompatActivity {
     RequestQueue rq;
     List<SliderUtils> sliderImg;
     ViewPagerAdapter viewPagerAdapter;
+    ProgressBar food_progress, drink_progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,8 @@ public class home extends AppCompatActivity {
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView2=(RecyclerView) findViewById(R.id.gridView2);
         btn_notification=(RelativeLayout)findViewById(R.id.notification_btn);
+        food_progress=(ProgressBar)findViewById(R.id.progress_food);
+        drink_progress=(ProgressBar)findViewById(R.id.progress_drink);
         list_data=new ArrayList<>();
         list_data2=new ArrayList<>();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
@@ -143,6 +148,16 @@ public class home extends AppCompatActivity {
         View header = navigationView.getHeaderView(0);
         TextView username = header.findViewById(R.id.user_name);
         TextView phone_number= header.findViewById(R.id.phone_number);
+        TextView verified_user=header.findViewById(R.id.verified_user);
+        TextView not_verified_user=header.findViewById(R.id.not_verified_user);
+        String status= user.getStatus();
+        String verified="VERIFIED";
+        if(status.equals(verified)){
+            verified_user.setVisibility(View.VISIBLE);
+        }
+        else{
+            not_verified_user.setVisibility(View.VISIBLE);
+        }
         username.setText(String.valueOf(user.getName()));
         phone_number.setText(String.valueOf(user.getPhone_number()));
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -194,6 +209,7 @@ public class home extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -208,6 +224,8 @@ public class home extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");
                     for (int i=0; i<array.length(); i++){
+                        food_progress.setVisibility(View.GONE);
+                        gridView.setVisibility(View.VISIBLE);
                         JSONObject ob=array.getJSONObject(i);
                         List_data listData=new List_data(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
                         list_data.add(listData);
@@ -225,7 +243,13 @@ public class home extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Connection poor, try to getting Data", Toast.LENGTH_SHORT).show();
+                        getData();
+                    }
+                }, 500);
             }
         });
         RequestQueue requestQueue= Volley.newRequestQueue(this);
@@ -240,6 +264,8 @@ public class home extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");
                     for (int i=0; i<array.length(); i++){
+                        drink_progress.setVisibility(View.GONE);
+                        gridView2.setVisibility(View.VISIBLE);
                         JSONObject ob=array.getJSONObject(i);
                         List_data2 listData2=new List_data2(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
                         list_data2.add(listData2);
@@ -257,6 +283,13 @@ public class home extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Connection poor, try to getting Data", Toast.LENGTH_SHORT).show();
+                        getData2();
+                    }
+                }, 500);
 
             }
         });

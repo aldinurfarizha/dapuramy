@@ -195,8 +195,15 @@
 
             </TextView>
         </RelativeLayout>
+<ProgressBar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    android:id="@+id/progress_food">
 
+</ProgressBar>
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -236,9 +243,17 @@
 
             </TextView>
         </RelativeLayout>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:id="@+id/progress_drink">
+
+        </ProgressBar>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridView2"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
