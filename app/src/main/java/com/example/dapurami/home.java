@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.example.dapurami.ui.ViewPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -77,7 +78,7 @@ public class home extends AppCompatActivity {
     RequestQueue rq;
     List<SliderUtils> sliderImg;
     ViewPagerAdapter viewPagerAdapter;
-    ProgressBar food_progress, drink_progress;
+    ShimmerRecyclerView shimmerRecyclerView, shimmerRecyclerView2, shimmerRecyclerView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,18 +92,21 @@ public class home extends AppCompatActivity {
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView2=(RecyclerView) findViewById(R.id.gridView2);
         btn_notification=(RelativeLayout)findViewById(R.id.notification_btn);
-        food_progress=(ProgressBar)findViewById(R.id.progress_food);
-        drink_progress=(ProgressBar)findViewById(R.id.progress_drink);
+        shimmerRecyclerView=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view);
+        shimmerRecyclerView2=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view2);
+        shimmerRecyclerView3=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view3);
         list_data=new ArrayList<>();
         list_data2=new ArrayList<>();
+        shimmerRecyclerView.showShimmerAdapter();
+        shimmerRecyclerView2.showShimmerAdapter();
+        shimmerRecyclerView3.showShimmerAdapter();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
         btn_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
-        getData2();
-        getData();
+
 
         rq = CustomVolleyRequest.getInstance(this).getRequestQueue();
 
@@ -112,7 +116,14 @@ public class home extends AppCompatActivity {
 
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
 
-        sendRequest();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+                getData2();
+                sendRequest();
+            }
+        }, 1750);
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -224,7 +235,7 @@ public class home extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");
                     for (int i=0; i<array.length(); i++){
-                        food_progress.setVisibility(View.GONE);
+                        shimmerRecyclerView.hideShimmerAdapter();
                         gridView.setVisibility(View.VISIBLE);
                         JSONObject ob=array.getJSONObject(i);
                         List_data listData=new List_data(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
@@ -246,7 +257,6 @@ public class home extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Connection poor, try to getting Data", Toast.LENGTH_SHORT).show();
                         getData();
                     }
                 }, 500);
@@ -264,7 +274,7 @@ public class home extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray array=jsonObject.getJSONArray("data");
                     for (int i=0; i<array.length(); i++){
-                        drink_progress.setVisibility(View.GONE);
+                        shimmerRecyclerView2.hideShimmerAdapter();
                         gridView2.setVisibility(View.VISIBLE);
                         JSONObject ob=array.getJSONObject(i);
                         List_data2 listData2=new List_data2(ob.getString("id_product"),ob.getString("product_name"), ob.getString("description"), ob.getString("stock"), ob.getString("price"), ob.getString("picture"));
@@ -286,10 +296,9 @@ public class home extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Connection poor, try to getting Data", Toast.LENGTH_SHORT).show();
                         getData2();
                     }
-                }, 500);
+                }, 1000);
 
             }
         });
@@ -301,7 +310,8 @@ public class home extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URLs.URL_BANNER, (String) null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
+ shimmerRecyclerView3.hideShimmerAdapter();
+ viewPager.setVisibility(View.VISIBLE);
                 for(int i = 0; i < response.length(); i++){
 
                     SliderUtils sliderUtils = new SliderUtils();
@@ -345,7 +355,7 @@ public class home extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                sendRequest();
             }
         });
 

@@ -31,8 +31,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+            <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                android:id="@+id/shimmer_recycler_view3"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                app:shimmer_demo_child_count="1"
+                app:shimmer_demo_grid_child_count="1"
+                app:shimmer_demo_layout="@layout/demo_shimmer3"
+                app:shimmer_demo_layout_manager_type="grid"
+                app:shimmer_demo_angle="20"
+                >
+
+            </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_marginBottom="8dp"/>
@@ -195,13 +208,18 @@
 
             </TextView>
         </RelativeLayout>
-<ProgressBar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:visibility="visible"
-    android:id="@+id/progress_food">
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmer_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_demo_child_count="2"
+            app:shimmer_demo_grid_child_count="2"
+            app:shimmer_demo_layout="@layout/grid_list_shimmer"
+            app:shimmer_demo_layout_manager_type="grid"
+            app:shimmer_demo_angle="20"
+            >
 
-</ProgressBar>
+        </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
             android:id="@+id/gridView"
@@ -243,13 +261,18 @@
 
             </TextView>
         </RelativeLayout>
-        <ProgressBar
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmer_recycler_view2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:id="@+id/progress_drink">
+            android:layout_height="match_parent"
+            app:shimmer_demo_child_count="2"
+            app:shimmer_demo_grid_child_count="2"
+            app:shimmer_demo_layout="@layout/grid_list_shimmer"
+            app:shimmer_demo_layout_manager_type="grid"
+            app:shimmer_demo_angle="20"
+            >
 
-        </ProgressBar>
+        </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridView2"
             android:layout_width="match_parent"

@@ -66,7 +66,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:id="@+id/harga_makanan"
-            android:textColor="#000"
+            android:textStyle="bold"
+            android:textColor="#FF6D00"
             >
         </TextView>
 
