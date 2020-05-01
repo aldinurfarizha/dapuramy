@@ -7,56 +7,62 @@
     android:weightSum="10"
     android:orientation="vertical"
     tools:context=".register">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="2.5">
-
-        <TextView
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="Create New Account"
-            android:textSize="30dp"
-            >
-        </TextView>
-
-        <ImageView
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/register">
-
-        </ImageView>
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingRight="20dp"
+        android:id="@+id/progress_style_register"
+        android:visibility="gone"
+        android:layout_weight="10">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:visibility="visible"
+            app:indicatorName="LineScaleIndicator"
+            app:indicatorColor="@color/colorPrimaryDark"
+            />
+    </RelativeLayout>
+<ScrollView
+    android:id="@+id/register_form"
+    android:visibility="visible"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="20dp"
-        android:layout_weight="6"
-        >
+        android:paddingRight="20dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:src="@drawable/register">
+
+        </ImageView>
         <TextView
             android:layout_marginTop="10dp"
             android:textColor="#8B8989"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="*You Must Register before Use our Service"
-            ></TextView>
+            >
+
+        </TextView>
         <EditText
             android:hint="Name"
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_marginBottom="20dp"
+
             android:id="@+id/input_name"
             android:drawableLeft="@drawable/akunbiru"
             android:layout_above="@+id/input_phone_number"
-            android:layout_height="wrap_content">
+            android:background="@drawable/rounded_border"
+            android:layout_height="50dp">
 
         </EditText>
         <EditText
@@ -66,7 +72,8 @@
             android:drawableLeft="@drawable/phone"
             android:id="@+id/input_phone_number"
             android:layout_above="@+id/input_password"
-            android:layout_height="wrap_content">
+            android:background="@drawable/rounded_border"
+            android:layout_height="50dp">
 
         </EditText>
         <EditText
@@ -77,12 +84,14 @@
             android:layout_centerInParent="true"
             android:drawableLeft="@drawable/password"
             android:id="@+id/input_password"
-            android:layout_height="wrap_content">
+            android:background="@drawable/rounded_border"
+            android:layout_height="50dp">
 
         </EditText>
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            android:layout_height="50dp"
             android:hint="Address "
             android:textColor="#4D4D4D"
             android:layout_centerHorizontal="true"
@@ -95,24 +104,31 @@
 
         </EditText>
 
-        <Button
+
+        <LinearLayout
+            android:id="@+id/btn_identity"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="KTP"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/roundedbutton2"
-            android:textColor="#fff"
-            android:layout_below="@id/address">
+            android:orientation="vertical"
+            android:background="@drawable/rounded_dot"
+            android:layout_height="150dp">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/keterangan_photo"
+                android:visibility="visible"
+                android:text="TAKE PHOTO (KTP/SIM/PASSPORT)">
 
-        </Button>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="25dp"
-        android:layout_weight="1.5">
+            </TextView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/identity_card"
+                android:src="@drawable/add_photo"
+                android:layout_height="100dp">
+            </ImageView>
+        </LinearLayout>
 
         <ProgressBar
             android:visibility="gone"
@@ -122,6 +138,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
         <Button
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
@@ -129,9 +146,12 @@
             android:background="@drawable/roundedbutton"
             android:id="@+id/btn_create_account"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true">
 
 
         </Button>
-    </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
+
 </LinearLayout>

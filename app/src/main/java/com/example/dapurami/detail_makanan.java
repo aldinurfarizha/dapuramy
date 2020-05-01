@@ -35,6 +35,7 @@ Button add_to_cart;
         setContentView(R.layout.activity_detail_makanan);
         this.context=context;
         Intent intent = getIntent();
+
         add_to_cart=(Button)findViewById(R.id.btn_addtocart);
          food_title = intent.getExtras().getString("food_title");
         image_url = intent.getExtras().getString("image_url");
@@ -58,7 +59,7 @@ Button add_to_cart;
 
                  new AlertDialog.Builder(detail_makanan.this)
                          .setView(formsView)
-                         .setTitle("Masukan Jumlah Pemesanan")
+                         .setTitle("How Many ?")
                          .setPositiveButton("OK",
                                  new DialogInterface.OnClickListener() {
                                      @TargetApi(11)
@@ -68,22 +69,40 @@ Button add_to_cart;
                                          Integer qtya=Integer.valueOf(qtyev.getText().toString());
                                          Integer pricea=Integer.valueOf(price);
                                          final Integer price_final=pricea*qtya;
-                                         try {
-                                             mSQLiteHelper.insertData(
-                                                     id_product,
-                                                     id_product.trim(),
-                                                     food_title.trim(),
-                                                     qty.trim(),
-                                                     image_url.trim(),
-                                                     price_final.toString().trim()
-                                             );
-                                             Toast.makeText(detail_makanan.this, "Added successfully", Toast.LENGTH_SHORT).show();
-                                             //reset views
+                                         if (qtya>0){
+                                             int stock_ready=Integer.valueOf(stock);
+                                             if(qtya<=stock_ready){
+                                                 try {
+                                                     mSQLiteHelper.insertData(
+                                                             id_product,
+                                                             id_product.trim(),
+                                                             food_title.trim(),
+                                                             qty.trim(),
+                                                             image_url.trim(),
+                                                             price_final.toString().trim()
+                                                     );
+                                                     Toast.makeText(detail_makanan.this, "Succsess, Added to Cart", Toast.LENGTH_SHORT).show();
+                                                     finish();
+                                                     Intent i = new Intent(detail_makanan.this,home.class);
+                                                     startActivity(i);
+
+                                                 }
+                                                 catch (Exception e){
+                                                     e.printStackTrace();
+                                                 }
+
+                                             }
+                                             else{
+                                                 Toast.makeText(detail_makanan.this, "We only Have "+stock+" Stock Only", Toast.LENGTH_SHORT).show();
+
+
+                                             }
 
                                          }
-                                         catch (Exception e){
-                                             e.printStackTrace();
+                                         else{
+                                             Toast.makeText(detail_makanan.this, "Tell us how many do you want order", Toast.LENGTH_SHORT).show();
                                          }
+
 
                                          dialog.cancel();
                                      }

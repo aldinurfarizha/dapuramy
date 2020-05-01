@@ -11,6 +11,7 @@
         android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:inputType="number"
+        android:text="1"
         android:hint="ex:8" >
 
         <requestFocus />
