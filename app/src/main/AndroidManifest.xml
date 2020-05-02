@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dapurami">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <application
 
+    <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name=".tracking_order_transfer"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".notification"></activity>
+        <activity android:name=".Vooting" />
+        <activity android:name=".profile" />
+        <activity android:name=".ready_menu" />
+        <activity android:name=".drink_menu" />
+        <activity android:name=".food_menu" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".tracking_order_transfer" />
         <activity android:name=".tracking_order_cod" />
         <activity android:name=".tracking_order_cash" />
         <activity android:name=".detail_order" />
         <activity android:name=".order_sukses" />
         <activity android:name=".check_out" />
-        <activity android:name=".cart" android:noHistory="true" />
+        <activity
+            android:name=".cart"
+            android:noHistory="true" />
         <activity android:name=".detail_makanan" />
         <activity
             android:name=".home"
@@ -35,8 +48,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login" android:noHistory="true"  />
-        <activity android:name=".after_splash" android:noHistory="true"  />
+        <activity
+            android:name=".login"
+            android:noHistory="true" />
+        <activity
+            android:name=".after_splash"
+            android:noHistory="true" />
         <activity android:name=".MainActivity" />
     </application>
 

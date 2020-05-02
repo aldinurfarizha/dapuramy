@@ -72,13 +72,14 @@ public class home extends AppCompatActivity {
     drink_adapter adapter2;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
-    RelativeLayout btn_notification;
+    RelativeLayout btn_notification, btn_ready_menu, btn_profile, btn_voting;
     private int dotscount;
     private ImageView[] dots;
     RequestQueue rq;
     List<SliderUtils> sliderImg;
     ViewPagerAdapter viewPagerAdapter;
     ShimmerRecyclerView shimmerRecyclerView, shimmerRecyclerView2, shimmerRecyclerView3;
+    TextView food_menu,drink_menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,14 @@ public class home extends AppCompatActivity {
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.cart);
         toolbar.setOverflowIcon(drawable);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        food_menu=(TextView)findViewById(R.id.food_menu_av);
+        drink_menu=(TextView)findViewById(R.id.drink_menu_av);
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView2=(RecyclerView) findViewById(R.id.gridView2);
         btn_notification=(RelativeLayout)findViewById(R.id.notification_btn);
+        btn_ready_menu=(RelativeLayout)findViewById(R.id.btn_ready_menu);
+        btn_profile=(RelativeLayout)findViewById(R.id.btn_profile);
+        btn_voting=(RelativeLayout)findViewById(R.id.btn_voting);
         shimmerRecyclerView=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view);
         shimmerRecyclerView2=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view2);
         shimmerRecyclerView3=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view3);
@@ -100,14 +106,55 @@ public class home extends AppCompatActivity {
         shimmerRecyclerView.showShimmerAdapter();
         shimmerRecyclerView2.showShimmerAdapter();
         shimmerRecyclerView3.showShimmerAdapter();
+
+
         // adapter=new MyAdapter(getApplicationContext(),list_data);
-        btn_notification.setOnClickListener(new View.OnClickListener() {
+
+        btn_ready_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(home.this, ready_menu.class);
+                startActivity(intent);
             }
         });
 
+        btn_voting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(home.this, Vooting.class);
+                startActivity(intent);
+            }
+        });
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(home.this, profile.class);
+                startActivity(intent);
+            }
+        });
 
+        btn_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(home.this, notification.class);
+                startActivity(intent);
+            }
+        });
+
+        food_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(home.this, food_menu.class);
+                startActivity(intent);
+            }
+        });
+        drink_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(home.this, drink_menu.class);
+                startActivity(intent);
+            }
+        });
         rq = CustomVolleyRequest.getInstance(this).getRequestQueue();
 
         sliderImg = new ArrayList<>();
@@ -189,8 +236,8 @@ public class home extends AppCompatActivity {
                     SharedPrefManager.getInstance(getApplicationContext()).logout();
                 }
                 if(id==R.id.nav_gallery){
-                    NavigationView navigationView= findViewById(R.id.nav_gallery);
-                    navigationView.setNavigationItemSelectedListener(this);
+                    Intent intent=new Intent(home.this, food_menu.class);
+                    startActivity(intent);
                 }
                 //This is for maintaining the behavior of the Navigation view
                 NavigationUI.onNavDestinationSelected(menuItem,navController);

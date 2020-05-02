@@ -77,6 +77,7 @@
                 <RelativeLayout
                 android:layout_width="0dp"
                 android:orientation="vertical"
+                android:id="@+id/btn_ready_menu"
                 android:layout_weight="2.5"
                 android:layout_height="wrap_content">
                 <ImageView
@@ -94,13 +95,14 @@
                     android:layout_marginTop="10dp"
                     android:textSize="11sp"
                     android:layout_centerHorizontal="true"
-                    android:text="List Menu">
+                    android:text="All Menu">
 
                 </TextView>
             </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:orientation="vertical"
+                    android:id="@+id/btn_voting"
                     android:layout_weight="2.5"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -125,6 +127,7 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:orientation="vertical"
+                    android:id="@+id/btn_profile"
                     android:layout_weight="2.5"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -198,6 +201,7 @@
                 android:text="View All"
                 android:textSize="13sp"
                 android:elevation="5dp"
+                android:id="@+id/food_menu_av"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
                 android:layout_centerVertical="true"
@@ -253,6 +257,7 @@
                 android:elevation="5dp"
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
+                android:id="@+id/drink_menu_av"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:textStyle="bold"
@@ -332,6 +337,18 @@
                     android:layout_height="wrap_content"
                     android:text="082235468564">
                 </TextView>
+                <Button
+                    android:layout_width="125dp"
+                    android:background="@drawable/roundedbutton"
+                    android:textColor="#fff"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:drawableRight="@drawable/maps_icon"
+                    android:id="@+id/direction"
+                    android:layout_height="wrap_content"
+                    android:text="Direction">
+
+                </Button>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
