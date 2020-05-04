@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="10"
+    android:orientation="vertical"
     tools:context=".Vooting">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_weight="9.3"
+    android:layout_height="0dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#E0F2F1"
+            android:layout_height="120dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@drawable/rounded_dot">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vote Food ! "
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:id="@+id/title_vote_food"
+        android:layout_centerInParent="true">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/content_food"
+        android:textSize="12sp"
+        android:text="You can Vote our product to serve for you tommorow"
+        android:layout_below="@+id/title_vote_food">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp"
+        android:text="Limit 3/Days"
+        android:layout_below="@+id/content_food">
+    </TextView>
+</RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="List Our Product"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textSize="17sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+            </TextView>
+        </RelativeLayout>
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmer_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_demo_child_count="4"
+            app:shimmer_demo_grid_child_count="2"
+            app:shimmer_demo_layout="@layout/grid_list_shimmer"
+            app:shimmer_demo_layout_manager_type="grid"
+            app:shimmer_demo_angle="20"
+            >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+</ScrollView>
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:text="Vote Now"
+       android:textColor="#fff"
+       android:layout_margin="7dp"
+       android:background="@drawable/roundedbutton"
+       android:layout_weight="0.7">
+
+   </Button>
+</LinearLayout>
