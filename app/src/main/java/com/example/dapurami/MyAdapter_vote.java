@@ -3,6 +3,7 @@ package com.example.dapurami;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MyAdapter_vote extends RecyclerView.Adapter<MyAdapter_vote.MahasiswaViewHolder> {
 
 
     private ArrayList<List_data_vote> dataList;
+    public  ArrayList<vote_model> vote_models;
+    public List<String> list;
     Context context;
 
     public MyAdapter_vote(ArrayList<List_data_vote> dataList) {
@@ -38,10 +44,14 @@ public class MyAdapter_vote extends RecyclerView.Adapter<MyAdapter_vote.Mahasisw
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.grid_list_vote, parent, false);
         return new MahasiswaViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(final MahasiswaViewHolder holder, final int position) {
+
+        vote_models= new ArrayList<>();
+
         final Context context = holder.img.getContext();
         final List_data_vote list_data_vote = dataList.get(position);
         Locale localeID = new Locale("in", "ID");
@@ -59,18 +69,25 @@ public class MyAdapter_vote extends RecyclerView.Adapter<MyAdapter_vote.Mahasisw
                                                public void onClick(View view) {
                                                    String data = "";
                                                    List_data_vote list_data_vote1 = (List_data_vote) holder.vote.getTag();
-
                                                    list_data_vote1.setSelected(holder.vote.isChecked());
-
                                                    dataList.get(position).setSelected(holder.vote.isChecked());
-
+                                                   list = new ArrayList<String>();
                                                    for (int j = 0; j < dataList.size(); j++) {
-
                                                        if (dataList.get(j).isSelected() == true) {
-                                                           data = data + "\n" + dataList.get(j).getProduct_name().toString() + "   " + dataList.get(j).getPrice().toString();
+                                                        //  list.add(dataList.get(j).getProduct_name());
+                                                          data= data +dataList.get(j).getId_product()+"|";
+
                                                        }
                                                    }
-                                                   Toast.makeText(context, "Selected Fruits : \n " + data, Toast.LENGTH_SHORT).show();
+
+                                                   Intent intent = new Intent("custom-message");
+                                                   intent.putExtra("vote",data);
+                                                   LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+
+
+
+
                                                }
                                            });
 

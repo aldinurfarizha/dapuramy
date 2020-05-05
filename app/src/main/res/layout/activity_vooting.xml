@@ -95,6 +95,7 @@
        android:text="Vote Now"
        android:textColor="#fff"
        android:layout_margin="7dp"
+       android:id="@+id/btn_vote_now"
        android:background="@drawable/roundedbutton"
        android:layout_weight="0.7">
 
