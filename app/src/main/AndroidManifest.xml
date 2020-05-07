@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".notification"></activity>
+        <activity android:name=".your_order"></activity>
+        <activity android:name=".notification" />
         <activity android:name=".Vooting" />
         <activity android:name=".profile" />
         <activity android:name=".ready_menu" />

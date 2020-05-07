@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -34,6 +35,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -107,7 +109,8 @@ public class home extends AppCompatActivity {
         shimmerRecyclerView2.showShimmerAdapter();
         shimmerRecyclerView3.showShimmerAdapter();
 
-
+        Log.e("Firebase", "token "+ FirebaseInstanceId.getInstance().getToken());
+        Toast.makeText(getApplicationContext(), FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_SHORT).show();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
 
         btn_ready_menu.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +240,10 @@ public class home extends AppCompatActivity {
                 }
                 if(id==R.id.nav_gallery){
                     Intent intent=new Intent(home.this, food_menu.class);
+                    startActivity(intent);
+                }
+                if(id==R.id.nav_tools){
+                    Intent intent=new Intent(home.this, your_order.class);
                     startActivity(intent);
                 }
                 //This is for maintaining the behavior of the Navigation view

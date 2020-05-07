@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="10sp"
-        android:text="Limit 3/Days"
+        android:text="Limit 3 Vote /Days"
         android:layout_below="@+id/content_food">
     </TextView>
 </RelativeLayout>

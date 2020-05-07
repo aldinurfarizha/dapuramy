@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "1031001161604",
+    "firebase_url": "https://exitus-6edb1.firebaseio.com",
+    "project_id": "exitus-6edb1",
+    "storage_bucket": "exitus-6edb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031001161604:android:43742e91b6c6a882e027d1",
+        "android_client_info": {
+          "package_name": "com.example.dapurami"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkVBp9K6aUweni27EzHU82Bn_eK9gKmo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031001161604:android:8d4b4cebed3dfd8e",
+        "android_client_info": {
+          "package_name": "com.example.exituspos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031001161604-5hfjge0hu1hd4kcp76fi3gunloerca6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.exituspos",
+            "certificate_hash": "1d6ae56627734da8c107659067495d32c501c5ae"
+          }
+        },
+        {
+          "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkVBp9K6aUweni27EzHU82Bn_eK9gKmo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031001161604:android:b56e34184d76f1efe027d1",
+        "android_client_info": {
+          "package_name": "com.inducesmile.androidfoodordering"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkVBp9K6aUweni27EzHU82Bn_eK9gKmo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031001161604-3q6i8en50l0fv0bibrtvhphisor4gfu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
