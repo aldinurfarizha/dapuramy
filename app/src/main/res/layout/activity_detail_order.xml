@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:background="#fff"
     tools:context=".detail_order">
 
 
@@ -13,78 +14,135 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="View Past  Order">
+            android:background="@drawable/ic_waves_detail">
 
-        </TextView>
+        </ImageView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="alamat dan order number">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            android:id="@+id/order_number"
+            android:text="Order Number : 65237"
+            android:drawableLeft="@drawable/order_number_icon">
 
         </TextView>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4.5">
-       <ScrollView
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:text="LIst Order">
-
-           </TextView>
-       </ScrollView>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            android:layout_below="@+id/order_number"
+            android:id="@+id/order_date"
+            android:text="2020-02-01"
+            android:drawableLeft="@drawable/calendar">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/order_date"
+            android:id="@+id/order_listssa"
+            android:drawableLeft="@drawable/active_dot"
+            android:text="  Order List  "
+            android:drawableRight="@drawable/active_dot">
+        </TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmer_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Subtotal">
+            app:shimmer_demo_child_count="4"
+            app:shimmer_demo_grid_child_count="1"
+            app:shimmer_demo_layout="@layout/grid_list_shimmer_detail_order"
+            app:shimmer_demo_layout_manager_type="linear_vertical"
+            app:shimmer_demo_angle="20"
+            >
 
-        </TextView>
+        </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/gridView_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Total">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:textSize="18sp"
+            android:text="Total:">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/total"
+            android:textSize="20sp"
+            android:textColor="#FF6D00"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:text="Rp 70.000">
 
         </TextView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Ststus : Complete">
-
-        </TextView>
+        android:layout_weight="1.5">
+        <com.kofigyan.stateprogressbar.StateProgressBar
+            android:id="@+id/your_state_progress_bar_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:spb_currentStateNumber="one"
+            app:spb_stateBackgroundColor="#BDBDBD"
+            android:layout_centerInParent="true"
+            app:spb_stateForegroundColor="@color/colorAccent"
+            app:spb_stateNumberBackgroundColor="#808080"
+            app:spb_stateNumberForegroundColor="#eeeeee"
+            app:spb_currentStateDescriptionColor="@color/colorAccent"
+            app:spb_stateDescriptionColor="#808080"
+            app:spb_maxStateNumber="three"/>
     </RelativeLayout>
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <Button
+            android:background="@drawable/roundedbutton"
             android:layout_width="match_parent"
+            android:textColor="#fff"
+            android:layout_margin="10dp"
+            android:id="@+id/back_order"
             android:layout_height="match_parent"
             android:text="Back To Order History">
 

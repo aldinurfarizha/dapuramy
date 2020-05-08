@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +48,9 @@ public class Vooting extends AppCompatActivity {
     Button btn_vote;
     String vote;
     User user;
+    RelativeLayout unvote,progress_style;
+    LinearLayout voting;
+    AVLoadingIndicatorView avi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +60,13 @@ public class Vooting extends AppCompatActivity {
         gridView=(RecyclerView) findViewById(R.id.gridView);
         list_data=new ArrayList<>();
         shimmerRecyclerView.showShimmerAdapter();
+        unvote=(RelativeLayout)findViewById(R.id.unvote);
+        voting=(LinearLayout)findViewById(R.id.vote);
         btn_vote=(Button)findViewById(R.id.btn_vote_now);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getData();
-            }
-        }, 1750);
+        progress_style=(RelativeLayout)findViewById(R.id.progress_style);
+        avi=(AVLoadingIndicatorView)findViewById(R.id.avi);
+        avi.show();
+        cek_vote();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-message"));
@@ -143,7 +149,62 @@ public class Vooting extends AppCompatActivity {
         }
 
     };
+    private void cek_vote() {
 
+        final String id = Integer.toString(user.getId());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_CEK_VOTE,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+
+                                try {
+                                    JSONObject jsonObject=new JSONObject(response);
+                                    if (!jsonObject.getBoolean("error")) {
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                getData();
+                                            }
+                                        }, 1750);
+                                        voting.setVisibility(View.VISIBLE);
+                                        progress_style.setVisibility(View.GONE);
+                                    }
+                                    else{
+                                        unvote.setVisibility(View.VISIBLE);
+                                        progress_style.setVisibility(View.GONE);
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Check Your Connection", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("id", id);
+
+                        return params;
+                    }
+                };
+
+                VolleySingleton.getInstance(Vooting.this).addToRequestQueue(stringRequest);
+            }
+        }, 1000);
+
+    }
     private void getData() {
         StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_FOR_VOTE, new Response.Listener<String>() {
             @Override
@@ -183,3 +244,4 @@ public class Vooting extends AppCompatActivity {
         requestQueue.add(stringRequest);
     } //ambil list maknan
 }
+

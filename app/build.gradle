@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-messaging:20.1.6'
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
 
 
 }

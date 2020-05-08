@@ -67,7 +67,15 @@ public class order_adapter extends RecyclerView.Adapter<order_adapter.MahasiswaV
                 Intent intent = new Intent(context.getApplicationContext(), detail_order.class);
                 intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 final String id_order= dataList2.get(position).getId();
+                final String total_harga= dataList2.get(position).getPrice_total();
+                final String status=dataList2.get(position).getStatus_order();
+                final String payment_method=dataList2.get(position).getMethod();
+                final String orderdate=dataList2.get(position).getOrder_date();
                 intent.putExtra("id_order",id_order);
+                intent.putExtra("total_harga",total_harga);
+                intent.putExtra("status",status);
+                intent.putExtra("method", payment_method);
+                intent.putExtra("order_date",orderdate);
                 context.startActivity(intent);
             }
         });

@@ -103,7 +103,7 @@ public class MyAdapter_vote extends RecyclerView.Adapter<MyAdapter_vote.Mahasisw
         holder.food_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), detail_makanan.class);
+                Intent intent = new Intent(context.getApplicationContext(), detail_makanan_preview.class);
                 intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 final String food_title = dataList.get(position).getProduct_name();
                 final String image_url = URLs.GET_IMAGE+dataList.get(position).getPicture();

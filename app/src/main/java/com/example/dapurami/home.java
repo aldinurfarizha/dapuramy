@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.example.dapurami.ui.ViewPagerAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,6 +38,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -61,7 +64,9 @@ import org.json.JSONObject;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class home extends AppCompatActivity {
 
@@ -82,7 +87,8 @@ public class home extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     ShimmerRecyclerView shimmerRecyclerView, shimmerRecyclerView2, shimmerRecyclerView3;
     TextView food_menu,drink_menu;
-
+    String newToken;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +98,7 @@ public class home extends AppCompatActivity {
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.cart);
         toolbar.setOverflowIcon(drawable);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        user = SharedPrefManager.getInstance(this).getUser();
         food_menu=(TextView)findViewById(R.id.food_menu_av);
         drink_menu=(TextView)findViewById(R.id.drink_menu_av);
         gridView=(RecyclerView) findViewById(R.id.gridView);
@@ -109,8 +116,6 @@ public class home extends AppCompatActivity {
         shimmerRecyclerView2.showShimmerAdapter();
         shimmerRecyclerView3.showShimmerAdapter();
 
-        Log.e("Firebase", "token "+ FirebaseInstanceId.getInstance().getToken());
-        Toast.makeText(getApplicationContext(), FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_SHORT).show();
         // adapter=new MyAdapter(getApplicationContext(),list_data);
 
         btn_ready_menu.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +177,7 @@ public class home extends AppCompatActivity {
                 getData();
                 getData2();
                 sendRequest();
+
             }
         }, 1750);
 
@@ -244,6 +250,18 @@ public class home extends AppCompatActivity {
                 }
                 if(id==R.id.nav_tools){
                     Intent intent=new Intent(home.this, your_order.class);
+                    startActivity(intent);
+                }
+                if(id==R.id.nav_slideshow){
+                    Intent intent=new Intent(home.this, Vooting.class);
+                    startActivity(intent);
+                }
+                if(id==R.id.nav_send){
+                    Intent intent=new Intent(home.this, notification.class);
+                    startActivity(intent);
+                }
+                if(id==R.id.nav_share){
+                    Intent intent=new Intent(home.this, profile.class);
                     startActivity(intent);
                 }
                 //This is for maintaining the behavior of the Navigation view
@@ -359,6 +377,7 @@ public class home extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     } //ambil list minuman
+
     public void sendRequest(){
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URLs.URL_BANNER, (String) null, new Response.Listener<JSONArray>() {
