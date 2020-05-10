@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_margin="10dp"
+            app:cardElevation="10dp"
+            android:id="@+id/item_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:drawableLeft="@drawable/order_number_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:id="@+id/order_number"
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        >
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:drawableLeft="@drawable/method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your Order Ayam Sambel Mozarella is ready to take prepare your self to take it"
+                        android:id="@+id/notif_description"
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        >
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2020-05-07 | 10:35"
+                        android:textSize="15sp"
+                        android:drawableLeft="@drawable/calendar"
+                        android:id="@+id/notif_date"
+                        android:layout_toRightOf="@+id/title_order_numb"
+                        >
+                    </TextView>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

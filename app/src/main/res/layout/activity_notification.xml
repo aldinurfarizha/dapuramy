@@ -6,9 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".notification">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/progress_style"
+        android:visibility="visible"
+        android:layout_weight="10">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:visibility="visible"
+            app:indicatorName="LineScaleIndicator"
+            app:indicatorColor="@color/colorPrimaryDark"
+            />
+    </RelativeLayout>
 <RelativeLayout
-    android:id="@+id/display_no_notification"
+    android:id="@+id/unvote"
     android:layout_width="match_parent"
+    android:visibility="gone"
     android:background="#EEECEC"
     android:layout_height="match_parent">
 
@@ -29,4 +47,72 @@
 
     </TextView>
 </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/vote"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="10"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="#B3E5FC"
+                    android:layout_height="120dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_dot">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Notification"
+                            android:textSize="20sp"
+                            android:textColor="#000"
+                            android:id="@+id/title_vote_food"
+                            android:layout_centerInParent="true">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/content_food"
+                            android:textSize="12sp"
+                            android:text="Your Notification will be display here"
+                            android:layout_below="@+id/title_vote_food">
+                        </TextView>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                    android:id="@+id/shimmer_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:shimmer_demo_child_count="4"
+                    app:shimmer_demo_grid_child_count="2"
+                    app:shimmer_demo_layout="@layout/grid_list_shimmer_detail_order"
+                    app:shimmer_demo_layout_manager_type="grid"
+                    app:shimmer_demo_angle="20"
+                    android:visibility="visible"
+                    >
+
+                </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/gridView_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>
