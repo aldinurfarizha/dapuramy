@@ -60,7 +60,7 @@ public class cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        User user = SharedPrefManager.getInstance(this).getUser();
+        final User user = SharedPrefManager.getInstance(this).getUser();
         mListView = findViewById(R.id.listView);
         mList = new ArrayList<>();
         mAdapter = new cart_adapter(this, R.layout.cart_list, mList);
@@ -73,31 +73,40 @@ public class cart extends AppCompatActivity {
             public void onClick(View view) {
                 Cursor cursor = splash_screen.mSQLiteHelper.getData("SELECT * FROM cart");
                 int total=cursor.getCount();
-                if(total==0){
-                    Toast.makeText(cart.this, "Order some Food or Drink before checkout ;)", Toast.LENGTH_SHORT).show();
+                String status= user.getStatus();
+                String verified="VERIFIED";
+                if(status.equals(verified)){
+                    if(total==0){
+                        Toast.makeText(cart.this, "Order some Food or Drink before checkout ;)", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        LayoutInflater inflater = (LayoutInflater) cart.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        final View formsView = inflater.inflate(R.layout.payment_method, null, false);
+                        final RadioGroup rg = (RadioGroup) formsView.findViewById(R.id.rg);
+
+                        new AlertDialog.Builder(cart.this)
+                                .setView(formsView)
+                                .setTitle("Select Payment Method")
+                                .setPositiveButton("OK",
+                                        new DialogInterface.OnClickListener() {
+                                            @TargetApi(11)
+                                            public void onClick(
+                                                    DialogInterface dialog, int id) {
+                                                int pilih = rg.getCheckedRadioButtonId();
+                                                RadioButton radio_selected = (RadioButton) formsView.findViewById(pilih);
+                                                String payment_selected=radio_selected.getText().toString();
+                                                place_transaction(payment_selected);
+
+                                                dialog.cancel();
+                                            }
+                                        }).show();
+                    }
+
                 }
                 else{
-                    LayoutInflater inflater = (LayoutInflater) cart.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final View formsView = inflater.inflate(R.layout.payment_method, null, false);
-                    final RadioGroup rg = (RadioGroup) formsView.findViewById(R.id.rg);
-
-                    new AlertDialog.Builder(cart.this)
-                            .setView(formsView)
-                            .setTitle("Select Payment Method")
-                            .setPositiveButton("OK",
-                                    new DialogInterface.OnClickListener() {
-                                        @TargetApi(11)
-                                        public void onClick(
-                                                DialogInterface dialog, int id) {
-                                            int pilih = rg.getCheckedRadioButtonId();
-                                            RadioButton radio_selected = (RadioButton) formsView.findViewById(pilih);
-                                            String payment_selected=radio_selected.getText().toString();
-                                            place_transaction(payment_selected);
-
-                                            dialog.cancel();
-                                        }
-                                    }).show();
+                    Toast.makeText(cart.this, "Your Account is Not Verified ;)", Toast.LENGTH_SHORT).show();
                 }
+
 
 
             }

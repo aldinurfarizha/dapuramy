@@ -2,8 +2,8 @@ package com.example.dapurami;
 
 public class URLs {
 
-    private static final String ROOT_URL = "http://192.168.176.22/apidapuramy/api.php?apicall=";
-    public static final String GET_IMAGE ="http://192.168.176.22/dapuramyweb/assets/images/product/";
+    private static final String ROOT_URL = "http://192.168.100.22/apidapuramy/api.php?apicall=";
+    public static final String GET_IMAGE ="http://192.168.100.22/dapuramyweb/assets/images/product/";
 
     public static final String URL_REGISTER = ROOT_URL + "signup";
     public static final String URL_PLACE_ORDER = ROOT_URL + "place_order";
@@ -21,4 +21,8 @@ public class URLs {
     public static final String URL_CEK_VOTE= ROOT_URL + "cek_vote";
     public static final String URL_GET_NOTIFICATION= ROOT_URL + "get_notification";
     public static final String URL_CEK_NOTIF= ROOT_URL + "cek_notif";
+    public static final String URL_GET_PROFILE= ROOT_URL + "get_profile";
+    public static final String URL_SAVE_CHANGE_PROFILE= ROOT_URL + "save_profile";
+    public static final String URL_REFRESH_PROFIL= ROOT_URL + "refresh_profile";
+
 }

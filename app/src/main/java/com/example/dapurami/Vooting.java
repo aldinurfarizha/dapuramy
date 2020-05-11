@@ -73,6 +73,12 @@ public class Vooting extends AppCompatActivity {
         btn_vote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String status= user.getStatus();
+                String verified="NOT VERIFIED";
+                if(status.equals(verified)){
+                    Toast.makeText(Vooting.this, "Your Account is Not Verified ;)", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(vote==null){
                     Toast.makeText(Vooting.this,"Select Product Before Vote" ,Toast.LENGTH_SHORT).show();
                     return;

@@ -115,6 +115,7 @@ public class home extends AppCompatActivity {
         shimmerRecyclerView.showShimmerAdapter();
         shimmerRecyclerView2.showShimmerAdapter();
         shimmerRecyclerView3.showShimmerAdapter();
+        refresh_account();
 
         // adapter=new MyAdapter(getApplicationContext(),list_data);
 
@@ -298,6 +299,55 @@ public class home extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+    public void refresh_account(){
+        final String id = Integer.toString(user.getId());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_REFRESH_PROFIL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+
+                                try {
+                                    JSONObject obj = new JSONObject(response);
+                                    if (!obj.getBoolean("error")) {
+                                        JSONObject userJson = obj.getJSONObject("user");
+                                        User user = new User(
+                                                userJson.getInt("id_customer"),
+                                                userJson.getString("name"),
+                                                userJson.getString("phone_number"),
+                                                userJson.getString("address"),
+                                                userJson.getString("status")
+                                        );
+                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Check Your Connection", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("id", id);
+
+                        return params;
+                    }
+                };
+
+                VolleySingleton.getInstance(home.this).addToRequestQueue(stringRequest);
+            }
+        }, 100);
     }
     private void getData() {
         StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_PRODUCT, new Response.Listener<String>() {
