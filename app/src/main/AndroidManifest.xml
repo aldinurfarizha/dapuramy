@@ -15,13 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".your_order"></activity>
+        <activity android:name=".upload_transfer"></activity>
+        <activity android:name=".transferlist" />
+        <activity android:name=".your_order" />
         <activity android:name=".notification" />
         <activity android:name=".Vooting" />
         <activity android:name=".profile" />
         <activity android:name=".ready_menu" />
         <activity android:name=".drink_menu" />
         <activity android:name=".food_menu" />
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:stopWithTask="false">
@@ -29,6 +32,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -63,7 +67,6 @@
             android:name=".after_splash"
             android:noHistory="true" />
         <activity android:name=".MainActivity" />
-
     </application>
 
 </manifest>

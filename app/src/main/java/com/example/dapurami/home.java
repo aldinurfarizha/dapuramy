@@ -265,6 +265,10 @@ public class home extends AppCompatActivity {
                     Intent intent=new Intent(home.this, profile.class);
                     startActivity(intent);
                 }
+                if(id==R.id.nav_transfer){
+                    Intent intent=new Intent(home.this, transferlist.class);
+                    startActivity(intent);
+                }
                 //This is for maintaining the behavior of the Navigation view
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
                 //This is for closing the drawer after acting on it

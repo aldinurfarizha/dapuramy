@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".upload_transfer">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/waves_tf"
+        android:layout_height="100dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_waves_detail">
+
+        </ImageView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/gambar_tf"
+        android:layout_below="@id/keterangan_tf"
+        android:layout_height="150dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/transfer">
+
+        </ImageView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/keterangan_tf"
+        android:layout_below="@id/waves_tf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"
+            android:text="Please do Transfer To BNI 01223134423 a.n Aldi Nurfarizha">
+
+        </TextView>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/btn_identity"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_below="@id/gambar_tf"
+        android:background="@drawable/rounded_dot"
+        android:layout_height="250dp">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/keterangan_photo"
+            android:visibility="visible"
+            android:text="TAKE PHOTO / SCREENSHOOT TRANSFER PROF)">
+
+        </TextView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/identity_card"
+            android:src="@drawable/add_photo"
+            android:layout_height="match_parent">
+        </ImageView>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Upload"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_upload_transfer">
+
+    </Button>
+</RelativeLayout>

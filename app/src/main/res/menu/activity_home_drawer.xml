@@ -29,9 +29,14 @@
                 android:icon="@drawable/notification_icon"
                 android:title="@string/menu_send" />
         <item
+            android:id="@+id/nav_transfer"
+            android:icon="@drawable/transfer"
+            android:title="@string/menu_transfer" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:title="@string/menu_logout" />
+
 
 
     </group>

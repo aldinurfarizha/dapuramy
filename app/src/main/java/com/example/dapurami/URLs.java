@@ -24,5 +24,7 @@ public class URLs {
     public static final String URL_GET_PROFILE= ROOT_URL + "get_profile";
     public static final String URL_SAVE_CHANGE_PROFILE= ROOT_URL + "save_profile";
     public static final String URL_REFRESH_PROFIL= ROOT_URL + "refresh_profile";
+    public static final String URL_GET_TRANSFER_LIST= ROOT_URL + "get_transfer_list";
+    public static final String URL_UPLOAD_TRANSFER= ROOT_URL + "upload_transfer";
 
 }
