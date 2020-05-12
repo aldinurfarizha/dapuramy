@@ -93,8 +93,8 @@ Button upload;
             switch (requestCode) {
                 case 0:
                     if (resultCode == RESULT_OK && data != null) {
-                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        imageView.setImageBitmap(selectedImage);
+                        bitmap = (Bitmap) data.getExtras().get("data");
+                        imageView.setImageBitmap(bitmap);
                         keterangan_foto.setVisibility(View.GONE);
                     }
 
@@ -112,6 +112,7 @@ Button upload;
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                bitmap=BitmapFactory.decodeFile(picturePath);
                                 keterangan_foto.setVisibility(View.GONE);
                                 cursor.close();
                             }

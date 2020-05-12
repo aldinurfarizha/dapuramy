@@ -115,6 +115,7 @@ public class home extends AppCompatActivity {
         shimmerRecyclerView.showShimmerAdapter();
         shimmerRecyclerView2.showShimmerAdapter();
         shimmerRecyclerView3.showShimmerAdapter();
+        newToken=FirebaseInstanceId.getInstance().getToken();
         refresh_account();
 
         // adapter=new MyAdapter(getApplicationContext(),list_data);
@@ -178,7 +179,7 @@ public class home extends AppCompatActivity {
                 getData();
                 getData2();
                 sendRequest();
-
+                send_token();
             }
         }, 1750);
 
@@ -352,6 +353,51 @@ public class home extends AppCompatActivity {
                 VolleySingleton.getInstance(home.this).addToRequestQueue(stringRequest);
             }
         }, 100);
+    }
+    public void send_token(){
+        user = SharedPrefManager.getInstance(this).getUser();
+        final String token=newToken;
+        final String id_user= Integer.toString(user.getId());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_GET_SEND_TOKEN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            //converting response to json object
+                            JSONObject obj = new JSONObject(response);
+
+                            //if no error in response
+                            if (!obj.getBoolean("error")) {
+
+
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token_fcm", token );
+                params.put("id_customer", id_user );
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(home.this).addToRequestQueue(stringRequest);
+
     }
     private void getData() {
         StringRequest stringRequest =new StringRequest(Request.Method.GET, URLs.URL_GET_READY_PRODUCT, new Response.Listener<String>() {
