@@ -177,6 +177,59 @@ public class cart extends AppCompatActivity {
             Log.d("jancoe", "update_product:" + price_total_rp);
         }
     }
+    public void place_order_transfer() {
+        Cursor cursor = splash_screen.mSQLiteHelper.getData("SELECT * FROM cart");
+        while (cursor.moveToNext()) {
+            final String id_product = cursor.getString(1);
+            final String qty = cursor.getString(3);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_PLACE_ORDER,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+                                //converting response to json object
+                                JSONObject obj = new JSONObject(response);
+
+                                //if no error in response
+                                if (!obj.getBoolean("error")) {
+
+
+
+                                } else {
+
+                                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("id_product", id_product);
+                    params.put("qty", qty);
+                    return params;
+                }
+            };
+
+            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+            splash_screen.mSQLiteHelper.deleteallData();
+            Toast.makeText(getApplicationContext(), "Order Has been placed, please Upload Transfer Prof", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(cart.this, upload_transfer.class);
+            startActivity(intent);
+
+        }
+
+
+    }
 
     public void place_order() {
         Cursor cursor = splash_screen.mSQLiteHelper.getData("SELECT * FROM cart");
@@ -251,12 +304,23 @@ public class cart extends AppCompatActivity {
                             //if no error in response
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), "Please wait", Toast.LENGTH_SHORT).show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        place_order();
-                                    }
-                                }, 1000);
+                                if(methode.equals("TRANSFER")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            place_order_transfer();
+                                        }
+                                    }, 1000);
+                                }
+                                else{
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            place_order();
+                                        }
+                                    }, 1000);
+                                }
+
 
                             } else {
 

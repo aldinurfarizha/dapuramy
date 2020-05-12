@@ -17,7 +17,7 @@ Button signin,signup;
         signup=(Button)(findViewById(R.id.btn_signup));
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
-            startActivity(new Intent(this, home.class));
+            startActivity(new Intent(this, progress.class));
         }
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

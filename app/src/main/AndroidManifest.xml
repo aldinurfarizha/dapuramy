@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".upload_transfer"></activity>
+        <activity android:name=".progress"></activity>
+        <activity android:name=".upload_transfer" />
         <activity android:name=".transferlist" />
         <activity android:name=".your_order" />
         <activity android:name=".notification" />

@@ -125,7 +125,7 @@ Button back;
             case "1":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 break;
-            case "2":
+            case "3":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 break;
         }
@@ -142,13 +142,13 @@ Button back;
             case "0":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 break;
-            case "1":
+            case "5":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 break;
-            case "2":
+            case "1":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 break;
-            case "3":
+            case "2":
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 break;
         }

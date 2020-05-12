@@ -23,7 +23,7 @@ Button getstarted;
         mSQLiteHelper.queryData("CREATE TABLE IF NOT EXISTS cart(id_order INTEGER , id_product VARCHAR PRIMARY KEY, product_name VARCHAR, qty INTEGER, img VARCHAR, price INTEGER)");
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
-            startActivity(new Intent(this, home.class));
+            startActivity(new Intent(this, progress.class));
         }
         getstarted.setOnClickListener(new View.OnClickListener() {
             @Override

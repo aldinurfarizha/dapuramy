@@ -30,7 +30,7 @@
            android:layout_height="wrap_content"
            android:layout_marginTop="10dp"
            android:id="@+id/transfer"
-           android:drawableLeft="@drawable/transfer"
+           android:drawableLeft="@drawable/transfer2"
            android:text="TRANSFER">
        </RadioButton>
    </RadioGroup>

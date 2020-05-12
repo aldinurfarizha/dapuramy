@@ -30,7 +30,7 @@
                 android:title="@string/menu_send" />
         <item
             android:id="@+id/nav_transfer"
-            android:icon="@drawable/transfer"
+            android:icon="@drawable/transfer_icon"
             android:title="@string/menu_transfer" />
         <item
             android:id="@+id/nav_logout"
