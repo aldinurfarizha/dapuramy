@@ -14,6 +14,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.dapurami.CustomVolleyRequest;
 import com.example.dapurami.R;
 import com.example.dapurami.SliderUtils;
+import com.example.dapurami.URLs;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
-        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
+        imageLoader.get(URLs.GET_BANNER+utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
 
         view.setOnClickListener(new View.OnClickListener() {
