@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,16 +37,18 @@ public class your_order extends AppCompatActivity {
     private RecyclerView gridView;
     order_adapter adapter;
     User user;
+    AVLoadingIndicatorView avi;
+    RelativeLayout no_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = SharedPrefManager.getInstance(this).getUser();
         setContentView(R.layout.activity_your_order);
-        shimmerRecyclerView=(ShimmerRecyclerView)findViewById(R.id.shimmer_recycler_view);
         gridView=(RecyclerView) findViewById(R.id.gridView_order);
+        avi=(AVLoadingIndicatorView)findViewById(R.id.avi);
+        no_order=(RelativeLayout)findViewById(R.id.no_order);
         list_data=new ArrayList<>();
-        shimmerRecyclerView.showShimmerAdapter();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -67,24 +71,27 @@ public class your_order extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
-
                                 try {
                                     JSONObject jsonObject=new JSONObject(response);
-                                    JSONArray array=jsonObject.getJSONArray("data");
-                                    for (int i=0; i<array.length(); i++){
-                                        shimmerRecyclerView.hideShimmerAdapter();
-                                        gridView.setVisibility(View.VISIBLE);
-                                        JSONObject ob=array.getJSONObject(i);
-                                        order_model listData=new order_model(ob.getString("id_order"),ob.getString("price_total"), ob.getString("method"), ob.getString("order_date"), ob.getString("status_order"));
-                                        list_data.add(listData);
+                                    if (!jsonObject.getBoolean("error")) {
+                                        JSONArray array=jsonObject.getJSONArray("data");
+                                        for (int i=0; i<array.length(); i++){
+                                            avi.setVisibility(View.GONE);
+                                            gridView.setVisibility(View.VISIBLE);
+                                            JSONObject ob=array.getJSONObject(i);
+                                            order_model listData=new order_model(ob.getString("id_order"),ob.getString("price_total"), ob.getString("method"), ob.getString("order_date"), ob.getString("status_order"));
+                                            list_data.add(listData);
+                                        }
+                                        adapter=new order_adapter(list_data);
+                                        RecyclerView.LayoutManager layoutManager=(new LinearLayoutManager(your_order.this, LinearLayoutManager.VERTICAL, false));
+                                        gridView.setLayoutManager(layoutManager);
+                                        gridView.setAdapter(adapter);
+
+                                    } else {
+                                        avi.setVisibility(View.GONE);
+                                        no_order.setVisibility(View.VISIBLE);
                                     }
-                                    adapter=new order_adapter(list_data);
-                                    RecyclerView.LayoutManager layoutManager=(new LinearLayoutManager(your_order.this, LinearLayoutManager.VERTICAL, false));
 
-                                    gridView.setLayoutManager(layoutManager);
-
-                                    gridView.setAdapter(adapter);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -93,7 +100,7 @@ public class your_order extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getApplicationContext(), "Check Your Connection", Toast.LENGTH_SHORT).show();
+                                getdata2();
 
                             }
                         }) {

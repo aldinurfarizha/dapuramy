@@ -3,25 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent"
     tools:context=".your_order">
-    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-        android:id="@+id/shimmer_recycler_view"
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:visibility="visible"
+            app:indicatorName="LineScaleIndicator"
+            app:indicatorColor="@color/colorPrimaryDark"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/gridView_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:shimmer_demo_child_count="10"
-        app:shimmer_demo_grid_child_count="1"
-        app:shimmer_demo_layout="@layout/grid_list_shimmer_order"
-        app:shimmer_demo_layout_manager_type="linear_vertical"
-        app:shimmer_demo_angle="20"
-        >
-
-    </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
-    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/no_order"
         android:visibility="gone"
-        android:id="@+id/gridView_order"
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_below="@+id/box"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="You have no Order\n Let's go Try Our Product">
+        </TextView>
+        <ImageView
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/box"
+            android:src="@drawable/sadbox_2x">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </ImageView>
+    </RelativeLayout>
+
+
 </RelativeLayout>
