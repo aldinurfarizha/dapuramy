@@ -43,7 +43,6 @@ public class transferlist extends AppCompatActivity {
         avi=(AVLoadingIndicatorView)findViewById(R.id.avi);
         no_order=(RelativeLayout)findViewById(R.id.no_order);
         list_data=new ArrayList<>();
-        shimmerRecyclerView.showShimmerAdapter();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

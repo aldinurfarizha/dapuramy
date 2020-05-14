@@ -43,7 +43,7 @@ public class transfer_adapter extends RecyclerView.Adapter<transfer_adapter.Maha
         Double hargarupiah= Double.parseDouble(dataList2.get(position).getTotal());
         holder.order_number.setText(dataList2.get(position).getId_order());
         final String status=dataList2.get(position).getUpload();
-        if (status.isEmpty()){
+        if (status.equals("no_image")){
             holder.status.setText("Need Upload Transfer Picture");
         }
         else{
@@ -55,7 +55,7 @@ public class transfer_adapter extends RecyclerView.Adapter<transfer_adapter.Maha
         holder.item_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(status.isEmpty()){
+                if(status.equals("no_image")){
                     Intent intent = new Intent(context.getApplicationContext(), upload_transfer.class);
                     intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                     final String id_order= dataList2.get(position).getId_order();

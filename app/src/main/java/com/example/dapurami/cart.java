@@ -223,7 +223,7 @@ public class cart extends AppCompatActivity {
             VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
             splash_screen.mSQLiteHelper.deleteallData();
             Toast.makeText(getApplicationContext(), "Order Has been placed, please Upload Transfer Prof", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(cart.this, upload_transfer.class);
+            Intent intent = new Intent(cart.this, transferlist.class);
             startActivity(intent);
 
         }

@@ -41,7 +41,7 @@
             android:textColor="#000"
             android:layout_marginTop="20dp"
             android:layout_centerInParent="true"
-            android:text="Please do Transfer To BNI 01223134423 a.n Aldi Nurfarizha">
+            android:text="Please do Transfer To BNI 01223134423 a.n Romi">
 
         </TextView>
     </RelativeLayout>

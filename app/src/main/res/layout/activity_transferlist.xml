@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:layout_height="wrap_content"
         style="@style/AVLoadingIndicatorView.Large"
-        android:visibility="gone"
+        android:visibility="visible"
         app:indicatorName="LineScaleIndicator"
         app:indicatorColor="@color/colorPrimaryDark"
         />
@@ -25,7 +25,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/no_order"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="match_parent">
         <TextView
             android:layout_width="wrap_content"

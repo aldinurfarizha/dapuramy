@@ -2,7 +2,9 @@ package com.example.dapurami;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +35,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.dapurami.register.RequestPermissionCode;
+
 public class upload_transfer extends AppCompatActivity {
 String id_order;
 ImageView imageView;
@@ -54,12 +58,34 @@ Button upload;
                 uploadBitmap(bitmap);
             }
         });
+        EnableRuntimePermissionToAccessFile();
+        EnableRuntimePermissionToAccessCamera();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage(upload_transfer.this);
             }
         });
+    }
+    public void EnableRuntimePermissionToAccessCamera(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(upload_transfer.this,
+                Manifest.permission.CAMERA))
+        {
+
+        } else {
+            ActivityCompat.requestPermissions(upload_transfer.this,new String[]{Manifest.permission.CAMERA}, RequestPermissionCode);
+        }
+    }
+    public void EnableRuntimePermissionToAccessFile(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(upload_transfer.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE))
+        {
+
+        } else {
+            ActivityCompat.requestPermissions(upload_transfer.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, RequestPermissionCode);
+        }
     }
     private void selectImage(Context context) {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -73,12 +99,26 @@ Button upload;
             public void onClick(DialogInterface dialog, int item) {
 
                 if (options[item].equals("Take Photo")) {
-                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(takePicture, 0);
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(upload_transfer.this, Manifest.permission.CAMERA))
+                    {
+                        Toast.makeText(getApplicationContext(), "You not Give Permission Camera, So Open Application Setting and Give Camera Permission for this Application (Dapuramy)", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(takePicture, 0);
+                    }
+
 
                 } else if (options[item].equals("Choose from Gallery")) {
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pickPhoto , 1);
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(upload_transfer.this, Manifest.permission.READ_EXTERNAL_STORAGE))
+                    {
+                        Toast.makeText(getApplicationContext(), "You not Give Permission READ STORAGE, So Open Application Setting and Give READ STORAGE Permission for this Application (Dapuramy)", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto , 1);
+                    }
+
 
                 } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();

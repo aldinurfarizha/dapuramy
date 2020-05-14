@@ -2,9 +2,9 @@ package com.example.dapurami;
 
 public class URLs {
 
-    private static final String ROOT_URL = "http://192.168.176.22/dapuramyweb/apidapuramy/api.php?apicall=";
-    public static final String GET_IMAGE ="http://192.168.176.22/dapuramyweb/assets/images/product/";
-    public static final String GET_BANNER ="http://192.168.176.22/dapuramyweb/assets/images/banner/";
+    private static final String ROOT_URL = "http://exitus-dev.com/testing/dapuramyweb/apidapuramy/Api.php?apicall=";
+    public static final String GET_IMAGE ="http://exitus-dev.com/testing/dapuramyweb/assets/images/product/";
+    public static final String GET_BANNER ="http://exitus-dev.com/testing/dapuramyweb/assets/images/banner/";
     public static final String URL_REGISTER = ROOT_URL + "signup";
     public static final String URL_PLACE_ORDER = ROOT_URL + "place_order";
     public static final String URL_PLACE_TRANSACTION = ROOT_URL + "place_transaction";
