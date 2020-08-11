@@ -59,6 +59,19 @@
             android:text="  Order List  "
             android:drawableRight="@drawable/active_dot">
         </TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCLE"
+            android:background="@drawable/roundedbutton3"
+            android:layout_marginRight="10dp"
+            android:textColor="#000"
+            android:id="@+id/btn_cancle"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true">
+
+        </Button>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

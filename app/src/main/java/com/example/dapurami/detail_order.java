@@ -1,9 +1,11 @@
 package com.example.dapurami;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +35,7 @@ import java.util.Map;
 public class detail_order extends AppCompatActivity {
 TextView id_order, total_harga, orderdate;
 String order_number, price_total, stts, payment_method,order_date;
-Button back;
+Button back, btn_cancle;
     private ArrayList<detail_order_model> list_data;
     ShimmerRecyclerView shimmerRecyclerView;
     private RecyclerView gridView;
@@ -54,7 +56,36 @@ Button back;
         payment_method = intent.getExtras().getString("method");
         order_date = intent.getExtras().getString("order_date");
         id_order.setText("Order Number: "+order_number);
+        btn_cancle=(Button)findViewById(R.id.btn_cancle);
         orderdate.setText(order_date);
+        if(stts.equals("0")){
+            btn_cancle.setVisibility(View.VISIBLE);
+        }
+        else{
+            btn_cancle.setVisibility(View.GONE);
+        }
+        btn_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(detail_order.this);
+                builder.setTitle("Are You Sure Cancle this Order ?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       cancle_order();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            cancle_order();
+            }
+        });
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
         Double hargarupiah= Double.parseDouble(price_total);
@@ -186,6 +217,41 @@ Button back;
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Check Your Connection", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("id_order", id_order);
+
+                        return params;
+                    }
+                };
+
+                VolleySingleton.getInstance(detail_order.this).addToRequestQueue(stringRequest);
+            }
+        }, 1000);
+
+    }
+    private void cancle_order() {
+
+        final String id_order = order_number;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_CANCLE_ORDER,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                            finish();
                             }
                         },
                         new Response.ErrorListener() {
